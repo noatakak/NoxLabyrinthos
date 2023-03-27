@@ -10,6 +10,7 @@ class game {
     player;
     rooms; 
     flavorText;
+    sounds;
     //maybe width and length fields
     //num of captives?
     //gameEnd and gameWon booleans and a checker?
@@ -26,6 +27,8 @@ class game {
         this.player = new player();
         //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
+        sounds = null;
+        
     }
 
 
@@ -97,6 +100,11 @@ class game {
 
     }
 
+
+
+//        Append the string to sounds        \\ 
+
+
     //when two captives meet, coin flip if they kill one of them or stick together
     //no limit on captive groups
     //return string of sound if captive gets killed, empty string if not
@@ -158,29 +166,42 @@ class game {
         return itemList;
     }
 
-    //
+    //AI for the monster, find manhatten distance of all the prey, breadth first search to find a path.
+    //update the monster array in the direction it chooses to go.
+    //does not need to return anything
     monsterAction(){
 
     }
 
     //Need two behaviors, exploration and escape from monster
+    //exploration go randomly to empty spaces, potentially backtrack based off of how smart we want it to be
+    //exploration when they see movement they move towards it. 
+    //During the escape it will be moving in the direction away from the monster maximize manhattan distance between it and the monster. 
+    //run a for loop through the captive arraylist to make these decisions.
     captiveAction(){
 
     }
 
-    //
-    playerAction(){
+    // A bunch of If statements
+    playerAction(playerInput){
 
+        //match the string to all the possible actions in all the if statements and update / call other things accordingly.
     }
 
-    //
+    //check the maze array around you, if statements and include player visibility value as conditionals to improve detail.
+    //check if you see movement 
+    //call flavor text every once in a while as you walk in empty spaces at random intervals. 
+    //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
 
     }
 
-    // 
+    // Feeds into the frount end for player choice.
+    //returns a list of strings that come from all available actions to the player including movement and actions. Max 9 actions in a turn .
     getActionList(){
+        actions = null;
 
+        return actions;
     }
 
 
@@ -198,6 +219,8 @@ class game {
     updateMonLoc(){
         //update the monster location board
     }
+
+    
 
 
 
