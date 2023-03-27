@@ -4,10 +4,11 @@
         <title>Nox Labyrinthos</title>
         <script src="scripts/game.js"></script>
         <link href="styles/mainStyle.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/public-pixel" rel="stylesheet">
     <head>
     <body>
         <script>
-            //const game = new window.Game();
+            // const game = new window.Game();
     
             window.addEventListener('load', () => {
                 // Code to execute when the page is loaded
@@ -34,16 +35,10 @@
             }
 
             createButtons();
-    
-            const resetButton = document.querySelector('.reset-button button');
-            resetButton.addEventListener('click', () => {
-                // Reload the page when the reset button is clicked
-                location.reload();
-            });
         </script>
         <div class="container">
             <div class ="reset-button">
-                <button>start over</button>
+                <button onclick="window.location.reload()">start over</button>
             </div>
             <div class="text">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, tortor vel malesuada tincidunt, libero dolor bibendum ipsum, vel aliquet ipsum neque a felis. Fusce in felis quam. Pellentesque eu arcu ac enim dignissim semper quis a magna.</p>
