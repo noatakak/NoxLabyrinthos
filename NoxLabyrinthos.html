@@ -2,17 +2,54 @@
 <html lang="en">
     <head>
         <title>Nox Labyrinthos</title>
+        <script src="scripts/game.js"></script>
         <link href="styles/mainStyle.css" type="text/css" rel="stylesheet">
     <head>
     <body>
+        <script>
+            //const game = new window.Game();
+    
+            window.addEventListener('load', () => {
+                // Code to execute when the page is loaded
+                // Create an instance of the Game class
+                // game = new window.Game();
+            });
+    
+            const buttonsDiv = document.querySelector('.buttons');
+
+            function createButtons() {
+                const buttonNames = ["pick up the revolver and open the door"];
+                buttonsDiv.innerHTML = ''; // clear previous buttons
+                buttonNames.forEach((name) => {
+                    const button = document.createElement('button');
+                    button.textContent = name;
+                    button.addEventListener('click', () => {
+                        // Code to execute when a button is clicked
+                        game.takeTurn(button.textContent);
+                        buttonNames = game.getActionList();
+                        createButtons();
+                    });
+                    buttonsDiv.appendChild(button);
+                });
+            }
+
+            createButtons();
+    
+            const resetButton = document.querySelector('.reset-button button');
+            resetButton.addEventListener('click', () => {
+                // Reload the page when the reset button is clicked
+                location.reload();
+            });
+        </script>
         <div class="container">
+            <div class ="reset-button">
+                <button>start over</button>
+            </div>
             <div class="text">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, tortor vel malesuada tincidunt, libero dolor bibendum ipsum, vel aliquet ipsum neque a felis. Fusce in felis quam. Pellentesque eu arcu ac enim dignissim semper quis a magna.</p>
             </div>
             <div class="buttons">
                 <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
             </div>
         </div>
     </body>
