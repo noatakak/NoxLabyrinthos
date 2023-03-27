@@ -12,6 +12,7 @@ class game {
     flavorText;
     //maybe width and length fields
     //num of captives?
+    //gameEnd and gameWon booleans and a checker?
 
     //        CONSTRUCTOR        \\ 
     constructor(){
@@ -139,10 +140,52 @@ class game {
     }
     
     //when player and monster meet, access the player chance to survive.
-    //
+    //can potentially end the game
+    //return a string if the player survives/ player dies?
     playMonEnc(){
-        //if player survives the monster runs off
+        //if player survives the monster runs off, call update monster location
+        //if player dies update the gameEnd Boolean somehow
     }
+
+    //takes in a array of x and y to specify which room is being searched
+    //need to access the player room search chance
+    //return items?
+    roomSearch(courdinate){
+        itemList = null;
+        //access room search chance.
+        //if room search chance passes, you need to generate the items in the room.
+
+        return itemList;
+    }
+
+    //
+    monsterAction(){
+
+    }
+
+    //Need two behaviors, exploration and escape from monster
+    captiveAction(){
+
+    }
+
+    //
+    playerAction(){
+
+    }
+
+    //
+    descriptionBuilder(){
+
+    }
+
+    // 
+    getActionList(){
+
+    }
+
+
+
+    //        UPDATE METHODS        \\ 
 
     //use to add corpses to the map as they appear or are created
     //does not return anything
@@ -151,8 +194,9 @@ class game {
 
     }
 
+    //used to move the monster around if they come into contact with the player and player survives.
     updateMonLoc(){
-
+        //update the monster location board
     }
 
 
