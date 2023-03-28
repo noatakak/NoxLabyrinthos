@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <title>Nox Labyrinthos</title>
-        <script type="module" src="scripts/Game.js">
+        <base href=".">
+        <script type="module" src="Game.js">
             game = new Game();
         </script>
         <link href="styles/mainStyle.css" type="text/css" rel="stylesheet">
@@ -22,7 +23,7 @@
         </div>
         <script>
             window.addEventListener('load', () => {
-                game = new Game();
+
             });
     
             buttonsDiv = document.querySelector('.buttons');
