@@ -1,19 +1,8 @@
-import { Captive } from './Captive.js';
-import { Monster } from './Monster.js';
-import { Player } from './Player.js';
 
-// export class Game{
-//     constructor(){
-//         this.cap = new Captive();
-//         this.mon = new Monster();
-//         this.play = new Player();
-//     }
-// }
-
-export class Game {
+class Game {
 
     //        FIELDS        \\ 
-    maze;
+    gameMaze;
     monLoc;
     capLoc;
     playLoc;
@@ -30,7 +19,7 @@ export class Game {
 
     //        CONSTRUCTOR        \\ 
     constructor(){
-        this.maze = this.genMaze();
+        this.gameMaze = this.genMaze(10,10);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playLoc = this.genPlayLoc();
@@ -40,7 +29,7 @@ export class Game {
         this.player = new Player(.5, .5, .5);
         //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
-        sounds = null;
+        this.sounds = null;
         this.turn = 0;
     }
 
@@ -51,31 +40,47 @@ export class Game {
     //be solvable by player 
     //returns a 2d Array of chars consisting of empty spaces, will also fill the room map
     //Maze sizes will always be the same, with just different layouts.
-    genMaze(){
-        //Generate maze somehow
-        const maze = [];
-        rows = 10;
-        cols = 10;
-
-        // Initialize maze with all walls
-        for (let row = 0; row < rows; row++) {
-          maze.push(new Array(cols).fill("w"));
+    genMaze(rows, cols){
+        let maze = new Array(rows);
+        for (let i = 0; i < rows; i++) {
+            maze[i] = new Array(cols);
+            for (let j = 0; j < cols; j++) {
+                maze[i][j] = '0';
+            }
         }
-      
-        // Set starting position randomly within perimeter
-        let startRow = 2 * Math.floor(Math.random() * (rows - 2)) + 1;
-        let startCol = 2 * Math.floor(Math.random() * (cols - 2)) + 1;
-        maze[startRow][startCol] = "s";
-      
-        // Run recursive backtracker algorithm to carve out maze
-        const visited = new Set();
-        recursiveBacktracker(startRow, startCol, maze, visited);
-      
-        // Convert maze to string representation
-        const mazeString = maze.map(row => row.join("")).join("\n");
-        
-        //cycle through maze and assign room cells to the rooms map
+
+        function carvePassagesFrom(currentRow, currentCol) {
+            let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+            directions.sort(() => Math.random() - 0.5);
+
+            for (let i = 0; i < directions.length; i++) {
+                let direction = directions[i];
+                let newRow = currentRow + direction[0];
+                let newCol = currentCol + direction[1];
+
+                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && maze[newRow][newCol] === '0') {
+                    maze[newRow][newCol] = ' ';
+                    carvePassagesFrom(newRow, newCol);
+                }
+            }
+        }
+
+        maze[1][1] = ' ';
+        carvePassagesFrom(1, 1);
+
+
+        this.printMaze(maze)
         return maze;
+    }
+
+    printMaze(maze) {
+        for (let i = 0; i < maze.length; i++) {
+            let row = "";
+            for (let j = 0; j < maze[i].length; j++) {
+                row += maze[i][j];
+            }
+            console.log(row);
+        }
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
@@ -136,8 +141,8 @@ export class Game {
     //no limit on captive groups
     //return string of sound if captive gets killed, empty string if not
     cap2Enc(Cap1, Cap2){
-        noise = ""
-        captiveKilled = false;
+        this.noise = ""
+        this.captiveKilled = false;
         //do the coin flip then execute the if statement
 
         if(captiveKilled){
@@ -154,7 +159,7 @@ export class Game {
     //update the behavior of the rest of the captive group, somehow.
     //returns the noise of the monster killing a captive
     capMonEnc(cap,mon){
-        noise = "You hear a scream and a roar as the Monster devours another victim.";
+        this.noise = "You hear a scream and a roar as the Monster devours another victim.";
         //decrement the captive object and set it to null if the capcount = 0 
         //Maybe this has the monster occupied for a turn or two?
         //create a body and call the update maze method

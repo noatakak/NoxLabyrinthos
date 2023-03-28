@@ -1,4 +1,4 @@
-export class Monster{
+class Monster{
     xLoc;
     yLoc;
     

@@ -1,4 +1,4 @@
-export class Captive{
+class Captive{
     xLoc;
     yLoc;
     captiveCount;

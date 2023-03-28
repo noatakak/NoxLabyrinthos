@@ -1,4 +1,4 @@
-export class Player{
+class Player{
     attackChance;
     surviveChance;
     searchChance;
