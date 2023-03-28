@@ -3,13 +3,13 @@
     <head>
         <title>Nox Labyrinthos</title>
         <base href=".">
-        <script type="module" src="Game.js">
+        <!-- <script type="module" src="Game.js">
             import { Game } from "./Game.js";
             let game;
             window.addEventListener('load', () => {
                 game = new Game();
             });
-        </script>
+        </script> -->
         <link href="styles/mainStyle.css" type="text/css" rel="stylesheet">
         <link href="https://fonts.cdnfonts.com/css/public-pixel" rel="stylesheet">
     <head>
@@ -25,7 +25,12 @@
                 <button>Button 1</button>
             </div>
         </div>
-        <script>
+        <script type="module" src="Game.js">
+            import { Game } from "./Game.js";
+            let game;
+            window.addEventListener('load', () => {
+                game = new Game();
+            });
             buttonsDiv = document.querySelector('.buttons');
             description = document.querySelector(".text").textContent;
             buttonNames = ["pick up the revolver and open the door"];
