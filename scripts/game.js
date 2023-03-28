@@ -1,4 +1,16 @@
-class game {
+import { Captive } from './captive.js';
+import { Monster } from './monster.js';
+import { Player } from './player.js';
+
+// export class Game{
+//     constructor(){
+//         this.cap = new Captive();
+//         this.mon = new Monster();
+//         this.play = new Player();
+//     }
+// }
+
+class Game {
 
     //        FIELDS        \\ 
     maze;
@@ -21,10 +33,10 @@ class game {
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playLoc = this.genPlayLoc();
-        this.monster = new monster();
+        this.monster = new Monster([0,0]);
         //might have to put a this keyword on the object
         this.captives = this.genCaptiveArray
-        this.player = new player();
+        this.player = new Player();
         //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
         sounds = null;
@@ -39,54 +51,47 @@ class game {
     //returns a 2d Array of chars consisting of empty spaces, will also fill the room map
     //Maze sizes will always be the same, with just different layouts.
     genMaze(){
-        Maze = null
         //Generate maze somehow
-        
-        rooms = null;
+
         //cycle through maze and assign room cells to the rooms map
-        return Maze;
+        return null;
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
     //returns a 2d bool array with true being where the monster is
     genMonLoc(){
-        MonLoc = null;
 
-        return MonLoc;
+        return null;
     }
 
     //generates a 2d array of all captive locations.
     //returns a int array same size as maze,  with the value of the int being the amount of captives in that cell
     genCapLoc(){
-        CapLoc = null;
         //generate the random num of captives in empty spaces across the maze.
 
-        return CapLoc;
+        return null;
     }
 
     //generates a boolean array of the player location with true being where the player is.
     //randomly generates the player in a empty space somewhere near the edge of the board.
     genPlayLoc(){
-        PlayLoc = null;
 
-        return PlayLoc;
+        return null;
     }
 
     //makes a bunch of objects of type captive and puts them in a arraylist
     //returns arraylist of captive objects
     genCaptiveArray(){
-        capArray = null;
 
-        return capArray;
+        return null;
     }
 
     //pulls all the flavor text from a text file of our strings
     //returns a arrraylist of strings that is randomly chosen.
     //maybe we can make it situation specific but that would be hard.
     pullFlavorText(){
-        flavorArray = null;
 
-        return flavorArray;
+        return null;
     }
 
 
@@ -97,7 +102,7 @@ class game {
     //does not return anything
     takeTurn(playInput){
 
-
+        return null;
     }
 
 
@@ -193,7 +198,7 @@ class game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-
+        return null;
     }
 
     // Feeds into the frount end for player choice.
@@ -219,10 +224,5 @@ class game {
     updateMonLoc(){
         //update the monster location board
     }
-
-    
-
-
-
 
 }
