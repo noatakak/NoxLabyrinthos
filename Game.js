@@ -73,7 +73,7 @@ export class Game {
       
         // Convert maze to string representation
         const mazeString = maze.map(row => row.join("")).join("\n");
-        return mazeString;
+        
         //cycle through maze and assign room cells to the rooms map
         return maze;
     }
