@@ -53,9 +53,29 @@ export class Game {
     //Maze sizes will always be the same, with just different layouts.
     genMaze(){
         //Generate maze somehow
+        const maze = [];
+        rows = 10;
+        cols = 10;
 
+        // Initialize maze with all walls
+        for (let row = 0; row < rows; row++) {
+          maze.push(new Array(cols).fill("w"));
+        }
+      
+        // Set starting position randomly within perimeter
+        let startRow = 2 * Math.floor(Math.random() * (rows - 2)) + 1;
+        let startCol = 2 * Math.floor(Math.random() * (cols - 2)) + 1;
+        maze[startRow][startCol] = "s";
+      
+        // Run recursive backtracker algorithm to carve out maze
+        const visited = new Set();
+        recursiveBacktracker(startRow, startCol, maze, visited);
+      
+        // Convert maze to string representation
+        const mazeString = maze.map(row => row.join("")).join("\n");
+        return mazeString;
         //cycle through maze and assign room cells to the rooms map
-        return null;
+        return maze;
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
