@@ -1,6 +1,6 @@
-import { Captive } from './scripts/Captive.js';
-import { Monster } from './scripts/Monster.js';
-import { Player } from './scripts/Player.js';
+import { Captive } from 'Captive.js';
+import { Monster } from 'monster.js';
+import { Player } from 'player.js';
 
 // export class Game{
 //     constructor(){
