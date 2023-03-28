@@ -10,7 +10,7 @@ import { Player } from './player.js';
 //     }
 // }
 
-class Game {
+export class Game {
 
     //        FIELDS        \\ 
     maze;
@@ -37,7 +37,7 @@ class Game {
         this.monster = new Monster([0,0]);
         //might have to put a this keyword on the object
         this.captives = this.genCaptiveArray
-        this.player = new Player();
+        this.player = new Player(.5, .5, .5);
         //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
         sounds = null;
