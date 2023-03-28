@@ -23,6 +23,7 @@ class Game {
     rooms; 
     flavorText;
     sounds;
+    turn;
     //maybe width and length fields
     //num of captives?
     //gameEnd and gameWon booleans and a checker?
@@ -40,7 +41,7 @@ class Game {
         //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
         sounds = null;
-        
+        this.turn = 0;
     }
 
 
@@ -102,6 +103,7 @@ class Game {
     //does not return anything
     takeTurn(playInput){
 
+        this.turn+=1;
         return null;
     }
 
@@ -198,15 +200,16 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        return null;
+        return "new text";
     }
 
     // Feeds into the frount end for player choice.
     //returns a list of strings that come from all available actions to the player including movement and actions. Max 9 actions in a turn .
     getActionList(){
-        actions = null;
-
-        return actions;
+        if(this.turn == 0){
+            return ["pick up the revolver and open the door"];
+        }
+        return ["action1", "action2", "action3"];
     }
 
 

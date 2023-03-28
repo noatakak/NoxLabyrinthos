@@ -3,6 +3,7 @@ export class Player{
     surviveChance;
     searchChance;
     captiveInParty;
+    currentDirection;
     
     constructor(attack, survive, search){
         this.attackChance = attack;

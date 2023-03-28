@@ -1,0 +1,16 @@
+move down the hallway on your left
+move down the hallway on your right
+move down the hallway in front of you
+move down the hallway behind you
+
+enter the room to your left
+enter the room to your right
+enter the room in front of you
+enter the room behind you
+
+shoot down the hallway on your left
+shoot down the hallway on your right
+shoot down the hallway in front of you
+shoot down the hallway behind you
+
+place a flash mine on your current location
