@@ -123,6 +123,7 @@ class Game {
 
         backtrack(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
         genRooms(maze);
+        stenRooms();
         return maze;
 
     }
