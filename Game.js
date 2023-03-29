@@ -19,7 +19,7 @@ class Game {
 
     //        CONSTRUCTOR        \\ 
     constructor(){
-        this.gameMaze = this.genMaze(10,10);
+        this.gameMaze = this.genMaze(20,20);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playLoc = this.genPlayLoc();
@@ -41,46 +41,62 @@ class Game {
     //returns a 2d Array of chars consisting of empty spaces, will also fill the room map
     //Maze sizes will always be the same, with just different layouts.
     genMaze(rows, cols){
-        let maze = new Array(rows);
+        const maze = [];
         for (let i = 0; i < rows; i++) {
-            maze[i] = new Array(cols);
-            for (let j = 0; j < cols; j++) {
-                maze[i][j] = '0';
-            }
+            maze.push(Array(cols).fill("█"));
         }
 
-        function carvePassagesFrom(currentRow, currentCol) {
-            let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-            directions.sort(() => Math.random() - 0.5);
-
-            for (let i = 0; i < directions.length; i++) {
-                let direction = directions[i];
-                let newRow = currentRow + direction[0];
-                let newCol = currentCol + direction[1];
-
-                if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && maze[newRow][newCol] === '0') {
-                    maze[newRow][newCol] = ' ';
-                    carvePassagesFrom(newRow, newCol);
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function backtrack(x, y) {
+            maze[x][y] = " ";
+            const neighbors = shuffle([
+            [x - 2, y],
+            [x, y - 2],
+            [x + 2, y],
+            [x, y + 2]
+            ]);
+            for (const [nx, ny] of neighbors) {
+                if (nx < 0 || nx >= rows || ny < 0 || ny >= cols || maze[nx][ny] !== "█") {
+                    continue;
                 }
+                maze[(x + nx) / 2][(y + ny) / 2] = " ";
+                backtrack(nx, ny);
             }
         }
 
-        maze[1][1] = ' ';
-        carvePassagesFrom(1, 1);
-
-
-        this.printMaze(maze)
+        function genRooms(maze){
+            let size = maze.length
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                }
+              }
+        }
+        
+        backtrack(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
+        genRooms(maze);
         return maze;
-    }
 
-    printMaze(maze) {
-        for (let i = 0; i < maze.length; i++) {
-            let row = "";
-            for (let j = 0; j < maze[i].length; j++) {
-                row += maze[i][j];
-            }
-            console.log(row);
-        }
+    }
+        
+    
+
+    printMaze(matrix) {
+        // for (let i = 0; i < maze.length; i++) {
+        //     let row = "";
+        //     for (let j = 0; j < maze[i].length; j++) {
+        //         row += maze[i][j];
+        //     }
+        //     console.log(row);
+        // }
+        const formatted = matrix.map(row => row.join(" ")).join("\n");
+        console.log(formatted);
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
@@ -129,6 +145,7 @@ class Game {
     takeTurn(playInput){
 
         this.turn+=1;
+        this.printMaze(this.gameMaze)
         return null;
     }
 
