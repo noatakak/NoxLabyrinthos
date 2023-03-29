@@ -202,6 +202,21 @@ class Game {
 
     //        CALLED METHODS        \\ 
 
+    // called when the player chooses to search their current room
+    searchRoom(){
+
+    }
+
+    //called when the player wants to leave their current room
+    leaveRoom(){
+
+    }
+
+    //called when a player shoots their revolver
+    gunshot(direction){
+        
+    }
+
     //called when the player presses a button
     //will call player action, monster action, captive action, discriptionbuilder method, and get action list
     //does not return anything
@@ -225,13 +240,53 @@ class Game {
                 this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
                 this.player.currentDirection = "EAST";
             }
-
         }else{
-
-
-
-
-
+            if(playInput = "move down the hallway in front of you"){
+                // forward hall
+                this.playerLoc = this.player.moveForward(this.playerLoc);
+            }else if(playInput = "move down the hallway behind you"){ 
+                // backward hall
+                this.playerLoc = this.player.moveBackward(this.playerLoc);
+            }else if(playInput = "move down the hallway on your left"){ 
+                // left hall
+                this.playerLoc = this.player.moveLeft(this.playerLoc);
+            }else if(playInput = "move down the hallway on your right"){ 
+                // right hall
+                this.playerLoc = this.player.moveRight(this.playerLoc);
+            }else if(playInput = "enter the room in front of you"){ 
+                // forward room
+                this.playerLoc = this.player.moveForward(this.playerLoc);
+            }else if(playInput = "enter the room behind you"){ 
+                // back room
+                this.playerLoc = this.player.moveBackward(this.playerLoc);
+            }else if(playInput = "enter the room to your left"){ 
+                // left room
+                this.playerLoc = this.player.moveLeft(this.playerLoc);
+            }else if(playInput = "enter the room to your right"){ 
+                // back room
+                this.playerLoc = this.player.moveRight(this.playerLoc);
+            }else if(playInput = "search the room"){
+                // search room
+                this.searchRoom();
+            }else if(playInput = "leave the room"){
+                // leave room
+                this.leaveRoom();
+            }else if(playInput = "shoot down the hallway in front of you"){ 
+                // shoot forward
+                this.gunshot("FORWARD");
+            }else if(playInput = "shoot down the hallway behind you"){ 
+                // shoot backward
+                this.gunshot("BACKWARD");
+            }else if(playInput = "shoot down the hallway on your left"){ 
+                // shoot left
+                this.gunshot("LEFT")
+            }else if(playInput = "shoot down the hallway on your right"){ 
+                // shoot right
+                this.gunshot("RIGHT");
+            }else if(playInput = "place a flash mine on the ground"){
+                // place flash mine
+                this.placeMine();
+            }
         }
         this.turn+=1;
         this.printMaze(this.gameMaze)
@@ -318,12 +373,6 @@ class Game {
     //run a for loop through the captive arraylist to make these decisions.
     captiveAction(){
 
-    }
-
-    // A bunch of If statements
-    playerAction(playerInput){
-
-        //match the string to all the possible actions in all the if statements and update / call other things accordingly.
     }
 
     //check the maze array around you, if statements and include player visibility value as conditionals to improve detail.

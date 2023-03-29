@@ -35,4 +35,20 @@ class Player{
     setCaptiveInParty(){
         this.captiveInParty++;
     }
+
+    moveForward(playerCords){
+
+    }
+
+    moveBackward(playerCords){
+
+    }
+
+    moveLeft(playerCords){
+
+    }
+
+    moveRight(playerCords){
+        
+    }
 }

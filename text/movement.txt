@@ -8,9 +8,12 @@ enter the room to your right
 enter the room in front of you
 enter the room behind you
 
+search the room
+leave the room
+
 shoot down the hallway on your left
 shoot down the hallway on your right
 shoot down the hallway in front of you
 shoot down the hallway behind you
 
-place a flash mine on your current location
+place a flash mine on the ground
