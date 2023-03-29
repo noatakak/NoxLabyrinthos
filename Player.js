@@ -38,8 +38,26 @@ class Player{
         this.captiveInParty++;
     }
 
-    addItem(){
-
+    addItem(item){
+        let des = "";
+        if(item == "flashlight"){
+            this.flashlight = true;
+        }else if(item == machete){
+            this.machete = true;
+        }else if(item == "body armor"){
+            this.bodyArmor = true;
+        }else if(item == "motion tracker"){
+            this.motionTracker = true;
+        }else if(item == "bullet"){
+            this.bulletCount+=1;
+        }else if(item == "battery"){
+            this.batteryCount+=1;
+        }else if(item == "shiv"){
+            this.shivCount+=1;
+        }else if(item == "flash mine"){
+            this.flashMineCount+=1;
+        }
+        return des;
     }
 
     move(direction, playerCords){

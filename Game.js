@@ -26,13 +26,13 @@ class Game {
         this.roomMap = this.genRooms(this.gameMaze);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
-        this.playerLoc = this.genPlayLoc();
+        this.playerLoc = this.start;
         this.monster = new Monster([0,0]);
         //might have to put a this keyword on the object
         this.captives = this.genCaptiveArray
         this.player = new Player(.5, .5, .5);
         this.flavorText = this.pullFlavorText
-        this.sounds = null;
+        this.sounds = [];
         this.turn = 0;
         this.printMaze(this.gameMaze);
         this.printMaze(this.gameMaze);
@@ -82,7 +82,7 @@ class Game {
     }
 
     genItem(){
-        let itemList = ["bullets", "flashlight", "battery", "shiv", "machete", "body armor", "flash mine", "motion tracker"];
+        let itemList = ["bullet", "flashlight", "battery", "shiv", "machete", "body armor", "flash mine", "motion tracker"];
         const randomIndex = Math.floor(Math.random() * itemList.length);
         return itemList[randomIndex];
     }
@@ -172,15 +172,6 @@ class Game {
         return null;
     }
 
-    //generates an array of the player location with true being where the player is.
-    //randomly generates the player in a empty space somewhere near the edge of the board.
-    genPlayLoc(){
-        // let playerArray = Object.assign({}, this.gameMaze);
-        // playerArray[this.start[0]][this.start[1]] = "P";
-        // return playerArray;
-        return this.start;
-    }
-
     //makes a bunch of objects of type captive and puts them in a arraylist
     //returns arraylist of captive objects
     genCaptiveArray(){
@@ -201,9 +192,12 @@ class Game {
 
     // called when the player chooses to search their current room
     searchRoom(){
-        this.player.addItem(this.roomMap.get(this.playerLoc));
+        let searchDescription = this.player.addItem(this.roomMap.get(this.playerLoc));
 
         this.roomMap.set(this.playerLoc, "empty");
+
+        //TODO make search description
+        return searchDescription;
     }
 
     //called when the player wants to leave their current room
@@ -230,12 +224,23 @@ class Game {
 
     //called when a player shoots their revolver
     gunshot(direction){
-        
+        let compassDir = "";
+        for(let i = 0; i < this.compass.currentDirection.length; i++){
+            let node = this.compass.currentDirection.head;
+            if(i == direction){
+                compassDir = node.data;
+                break;
+            }
+            node = node.next;
+        }
+
     }
 
     //called when a player places a mine
     placeMine(){
         this.gameMaze[this.playerLoc[0]][this.player[1]] = "m";
+        this.player.flashMineCount-=1;
+        return "you place a mine at your current location."
     }
 
     //called when the player presses a button
@@ -248,18 +253,23 @@ class Game {
             if(playInput = "move down the hallway in front of you"){
                 // forward hall
                 this.playerLoc = this.player.move(0, this.playerLoc);
+                this.sounds.append("you walk down the hallway in front of you.");
             }else if(playInput = "move down the hallway behind you"){ 
                 // backward hall
                 this.playerLoc = this.player.move(2, this.playerLoc);
+                this.sounds.append("you walk down the hallway behind you.");
             }else if(playInput = "move down the hallway on your left"){ 
                 // left hall
                 this.playerLoc = this.player.move(3, this.playerLoc);
+                this.sounds.append("you walk down the hallway to your left.");
             }else if(playInput = "move down the hallway on your right"){ 
                 // right hall
                 this.playerLoc = this.player.move(1, this.playerLoc);
+                this.sounds.append("you walk down the hallway to your right");
             }else if(playInput = "enter the room in front of you"){ 
                 // forward room
                 this.playerLoc = this.player.move(0, this.playerLoc);
+                this.sounds.append("you enter the room in front of you.")
             }else if(playInput = "enter the room behind you"){ 
                 // back room
                 this.playerLoc = this.player.move(2, this.playerLoc);
@@ -271,7 +281,7 @@ class Game {
                 this.playerLoc = this.player.move(1, this.playerLoc);
             }else if(playInput = "search the room"){
                 // search room
-                this.searchRoom();
+                this.sounds.append(this.searchRoom());
             }else if(playInput = "leave the room"){
                 // leave room
                 this.leaveRoom();
@@ -289,7 +299,7 @@ class Game {
                 this.gunshot("RIGHT");
             }else if(playInput = "place a flash mine on the ground"){
                 // place flash mine
-                this.placeMine();
+                this.sounds.append(this.placeMine());
             }
         }
         this.monsterAction();
