@@ -403,13 +403,6 @@ class Game {
     getActionList(){
         availActions = [];
 
-        fetch('text/movement.txt');
-        then(response => response.text())
-        then(data => {
-            const lines = data.split('\n');
-        })
-        .catch(error => console.error(error));
-
         if(this.turn == 0){
             return ["pick up the revolver and open the door"];
         }else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
@@ -418,7 +411,105 @@ class Game {
         else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "empty"){
                 return ["rest in the room", "leave the room"];
         }else{
+
+            //Movement actions
+            let arr = [];
+            let node = Player.compass.head;
+            for(let i = 0; i < Player.compass.length; i++){
+                if(node.data = "NORTH"){
+                    arr.push(playerLoc[0] - 1,playerLoc[1]);
+                }else if(node.data = "EAST"){
+                    arr.push(playerLoc[0], playerLoc[1]+1);
+                }else if(node.data = "SOUTH"){
+                    arr.push(playerLoc[0]+1, playerLoc[1]);
+                }else if(node.data = "WEST"){
+                    arr.push(playerLoc[0], playerLoc[1] -1);
+                }
+                node = node.next;
+            }
             
+            let size = this.gameMaze.length;
+            for(let i = 0; i < arr.length(); i++){
+                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0][arr[i][1]]] != "█" && this.gameMaze[arr[i][0][arr[i][1]]] != "□"){
+                    if(i == 0){
+                        availActions.push("move down the hallway in front of you");
+                    }else if(i == 1){
+                        availActions.push("move down the hallway on your right");
+                    }else if(i == 2){
+                        availActions.push("move down the hallway behind you");
+                    }else if(i == 3){
+                        availActions.push("move down the hallway on your left");
+                    }
+                }
+            }
+
+            //room actions
+            arr = [];
+            node = Player.compass.head;
+            for(let i = 0; i < Player.compass.length; i++){
+                if(node.data = "NORTH"){
+                    arr.push(playerLoc[0] - 1,playerLoc[1]);
+                }else if(node.data = "EAST"){
+                    arr.push(playerLoc[0], playerLoc[1]+1);
+                }else if(node.data = "SOUTH"){
+                    arr.push(playerLoc[0]+1, playerLoc[1]);
+                }else if(node.data = "WEST"){
+                    arr.push(playerLoc[0], playerLoc[1] -1);
+                }
+                node = node.next;
+            }
+            
+            size = this.gameMaze.length;
+            for(let i = 0; i < arr.length(); i++){
+                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0][arr[i][1]]] == "□"){
+                    if(i == 0){
+                        availActions.push("enter the room in front of you");
+                    }else if(i == 1){
+                        availActions.push("enter the room to your right");
+                    }else if(i == 2){
+                        availActions.push("enter the room behind you");
+                    }else if(i == 3){
+                        availActions.push("enter the room to your left");
+                    }
+                }
+            }
+
+            //shooting actions
+            arr = [];
+            node = Player.compass.head;
+            for(let i = 0; i < Player.compass.length; i++){
+                if(node.data = "NORTH"){
+                    arr.push(playerLoc[0] - 1,playerLoc[1]);
+                }else if(node.data = "EAST"){
+                    arr.push(playerLoc[0], playerLoc[1]+1);
+                }else if(node.data = "SOUTH"){
+                    arr.push(playerLoc[0]+1, playerLoc[1]);
+                }else if(node.data = "WEST"){
+                    arr.push(playerLoc[0], playerLoc[1] -1);
+                }
+                node = node.next;
+            }
+            
+            size = this.gameMaze.length;
+            for(let i = 0; i < arr.length(); i++){
+                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0][arr[i][1]]] != "█" && this.gameMaze[arr[i][0][arr[i][1]]] != "□"){
+                    if(i == 0){
+                        availActions.push("shoot down the hallway in front of you");
+                    }else if(i == 1){
+                        availActions.push("shoot down the hallway on your right");
+                    }else if(i == 2){
+                        availActions.push("shoot down the hallway behind you");
+                    }else if(i == 3){
+                        availActions.push("shoot down the hallway on your left");
+                    }
+                }
+            }
+
+            if(this.player.flashMineCount > 0){
+                availActions.push("place a flash mine on the ground");
+            }
+
+
         }
 
 
