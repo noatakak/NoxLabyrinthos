@@ -14,13 +14,16 @@ class Game {
     sounds;
     turn;
     roomMap;
+    // start and end courdinates, make sure to make a checker in the player turn method to ensure a win
+    start;
+    end;
     //maybe width and length fields
     //num of captives?
     //gameEnd and gameWon booleans and a checker?
 
     //        CONSTRUCTOR        \\ 
     constructor(){
-        this.gameMaze = this.genMaze(20,20);
+        this.gameMaze = this.genMaze(15,15);
         this.roomMap = this.genRooms(this.gameMaze);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
@@ -71,6 +74,7 @@ class Game {
                 backtrack(nx, ny);
             }
         }
+
         backtrack(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
         return maze;
 
@@ -83,6 +87,40 @@ class Game {
     }
 
     genRooms(maze){
+        //runs two for loops through the rooms map and finds the two rooms that are furthest away from each other
+        //These rooms will then be used as start and end of the maze.
+        //
+        function stenRooms(){
+            let idRoom1;
+            let idRoom2;
+            let farAway = 0;
+            let roomCoords = [];
+
+            let size = maze.length
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if(maze[i][j] == "□") {
+                        //parse through the maze and add all room courdinates as an array 
+                        //to the room coord array
+                        let tempArr = [i,j];
+                        roomCoords.push(tempArr);
+                    }
+                }
+              }
+
+            for(let i = 0; i < roomCoords.length; i++){
+                for(let j = 0; j < roomCoords.length; j++){
+                    let manDistance = Math.abs(roomCoords[j][0] - roomCoords[i][0]) + Math.abs(roomCoords[j][1] - roomCoords[i][1])
+                    if(manDistance > farAway){
+                        farAway = manDistance;
+                        idRoom1 = roomCoords[i];
+                        idRoom2 = roomCoords[j];
+                    }
+                }
+            }
+
+            return [idRoom1, idRoom2];
+        }
         let roomMap = new Map();
         let size = maze.length
         for (let i = 0; i < size; i++) {
@@ -107,6 +145,9 @@ class Game {
                 }
             }
         }
+        let stend = stenRooms();
+        this.start = stend[0];
+        this.end = stend[1];
         return roomMap
     }
         
