@@ -386,10 +386,30 @@ class Game {
     // Feeds into the frount end for player choice.
     //returns a list of strings that come from all available actions to the player including movement and actions. Max 9 actions in a turn .
     getActionList(){
+        availActions = [];
+
+        fetch('text/movement.txt');
+        then(response => response.text())
+        then(data => {
+            const lines = data.split('\n');
+        })
+        .catch(error => console.error(error));
+
         if(this.turn == 0){
             return ["pick up the revolver and open the door"];
+        }else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
+                return ["search the room", "leave the room"];
         }
-        return ["action1", "action2", "action3"];
+        else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "empty"){
+                return ["rest in the room", "leave the room"];
+        }else{
+            
+        }
+
+
+        
+        
+        return availActions;
     }
 
 
