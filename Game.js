@@ -13,6 +13,7 @@ class Game {
     flavorText;
     sounds;
     turn;
+    roomMap;
     //maybe width and length fields
     //num of captives?
     //gameEnd and gameWon booleans and a checker?
@@ -20,6 +21,7 @@ class Game {
     //        CONSTRUCTOR        \\ 
     constructor(){
         this.gameMaze = this.genMaze(20,20);
+        this.roomMap = this.genRooms(this.gameMaze);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playLoc = this.genPlayLoc();
@@ -27,7 +29,6 @@ class Game {
         //might have to put a this keyword on the object
         this.captives = this.genCaptiveArray
         this.player = new Player(.5, .5, .5);
-        //the room map will be initilized by the genMaze() method
         this.flavorText = this.pullFlavorText
         this.sounds = null;
         this.turn = 0;
@@ -70,31 +71,48 @@ class Game {
                 backtrack(nx, ny);
             }
         }
-
-        function genRooms(maze){
-            let size = maze.length
-            for (let i = 0; i < size; i++) {
-                for (let j = 0; j < size; j++) {
-                }
-              }
-        }
-        
         backtrack(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
-        genRooms(maze);
         return maze;
 
+    }
+
+    genItem(){
+        let itemList = ["bullets", "flashlight", "battery", "shiv", "machete", "body armor", "flash mine", "motion tracker"];
+        const randomIndex = Math.floor(Math.random() * itemList.length);
+        return itemList[randomIndex];
+    }
+
+    genRooms(maze){
+        let roomMap = new Map();
+        let size = maze.length
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                let isRoom = false;
+                let topNeighbor = maze[i][j] == " " && i > 0 && maze[i-1][j] == "█";
+                let bottomNeighbor = maze[i][j] == " " && i < size-1 && maze[i+1][j] == "█";
+                let leftNeighbor = maze[i][j] == " " && j > 0 && maze[i][j-1] == "█";
+                let rightNeighbor = maze[i][j] == " " && j < size-1 && maze[i][j+1] == "█";
+                if(topNeighbor && bottomNeighbor && leftNeighbor && !rightNeighbor){
+                    isRoom = true;
+                }else if(topNeighbor && bottomNeighbor && !leftNeighbor && rightNeighbor){
+                    isRoom = true;
+                }else if(topNeighbor && !bottomNeighbor && leftNeighbor && rightNeighbor){
+                    isRoom = true;
+                }else if(!topNeighbor && bottomNeighbor && leftNeighbor && rightNeighbor){
+                    isRoom = true;
+                }
+                if(isRoom){
+                    maze[i][j] = "□";
+                    roomMap.set([i,j], this.genItem());
+                }
+            }
+        }
+        return roomMap
     }
         
     
 
     printMaze(matrix) {
-        // for (let i = 0; i < maze.length; i++) {
-        //     let row = "";
-        //     for (let j = 0; j < maze[i].length; j++) {
-        //         row += maze[i][j];
-        //     }
-        //     console.log(row);
-        // }
         const formatted = matrix.map(row => row.join(" ")).join("\n");
         console.log(formatted);
     }
