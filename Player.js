@@ -36,6 +36,10 @@ class Player{
         this.captiveInParty++;
     }
 
+    addItem(){
+        
+    }
+
     moveForward(playerCords){
 
     }
@@ -49,6 +53,6 @@ class Player{
     }
 
     moveRight(playerCords){
-        
+
     }
 }

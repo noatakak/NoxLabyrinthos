@@ -152,9 +152,7 @@ class Game {
         this.end = stend[1];
         return roomMap
     }
-        
-    
-
+   
     printMaze(matrix) {
         const formatted = matrix.map(row => row.join(" ")).join("\n");
         console.log(formatted);
@@ -204,16 +202,40 @@ class Game {
 
     // called when the player chooses to search their current room
     searchRoom(){
+        this.player.addItem(this.roomMap.get(this.playerLoc));
 
+        this.roomMap.set(this.playerLoc, "empty");
     }
 
     //called when the player wants to leave their current room
     leaveRoom(){
-
+        let size = this.gameMaze.length;
+        let topNeighbor = this.start[0] > 0 && this.gameMaze[this.start[0]-1][this.start[1]] == " ";
+        let bottomNeighbor = this.start[0] < size-1 && this.gameMaze[this.start[0]+1][this.start[1]] == " ";
+        let leftNeighbor = this.start[1] > 0 && this.gameMaze[this.start[0]][this.start[1]-1] == " ";
+        let rightNeighbor =  this.start[1] < size-1 && this.gameMaze[this.start[0]][this.start[1]+1] == " ";
+        if(topNeighbor){
+            this.playerLoc = [this.playerLoc[0]-1, this.playerLoc[1]]
+            this.player.currentDirection = "NORTH";
+        }else if(bottomNeighbor){
+            this.playerLoc = [this.playerLoc[0]+1, this.playerLoc[1]]
+            this.player.currentDirection = "SOUTH";
+        }else if(leftNeighbor){
+            this.playerLoc = [this.playerLoc[0], this.playerLoc[1]-1]
+            this.player.currentDirection = "WEST";
+        }else if(rightNeighbor){
+            this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
+            this.player.currentDirection = "EAST";
+        }
     }
 
     //called when a player shoots their revolver
     gunshot(direction){
+        
+    }
+
+    //called when a player places a mine
+    placeMine(){
         
     }
 
@@ -222,24 +244,7 @@ class Game {
     //does not return anything
     takeTurn(playInput){
         if(this.turn == 0){
-            let size = this.gameMaze.length;
-            let topNeighbor = this.start[0] > 0 && this.gameMaze[this.start[0]-1][this.start[1]] == " ";
-            let bottomNeighbor = this.start[0] < size-1 && this.gameMaze[this.start[0]+1][this.start[1]] == " ";
-            let leftNeighbor = this.start[1] > 0 && this.gameMaze[this.start[0]][this.start[1]-1] == " ";
-            let rightNeighbor =  this.start[1] < size-1 && this.gameMaze[this.start[0]][this.start[1]+1] == " ";
-            if(topNeighbor){
-                this.playerLoc = [this.playerLoc[0]-1, this.playerLoc[1]]
-                this.player.currentDirection = "NORTH";
-            }else if(bottomNeighbor){
-                this.playerLoc = [this.playerLoc[0]+1, this.playerLoc[1]]
-                this.player.currentDirection = "SOUTH";
-            }else if(leftNeighbor){
-                this.playerLoc = [this.playerLoc[0], this.playerLoc[1]-1]
-                this.player.currentDirection = "WEST";
-            }else if(rightNeighbor){
-                this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
-                this.player.currentDirection = "EAST";
-            }
+            this.leaveRoom();
         }else{
             if(playInput = "move down the hallway in front of you"){
                 // forward hall
@@ -288,8 +293,9 @@ class Game {
                 this.placeMine();
             }
         }
+        this.monsterAction();
+        this.captiveAction();
         this.turn+=1;
-        this.printMaze(this.gameMaze)
         return null;
     }
 

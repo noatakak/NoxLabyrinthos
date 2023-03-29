@@ -1,11 +1,11 @@
-you find a box with 1 bullet inside
-you find a box with 0 bullets inside
-you find a flashlight
-you find a box with 1 battery inside
-you find a box with 0 batteries inside
-you find a machete
-you find a box with 1 shiv inside
-you find a box ith 0 shivs inside
-you find a piece of body armor
-you find a flashmine
-you find a motion tracking device
+you find a box with 1 bullet inside.
+you find a box with 0 bullets inside.
+you find a flashlight.
+you find a box with 1 battery inside.
+you find a box with 0 batteries inside.
+you find a machete.
+you find a box with 1 shiv inside.
+you find a box ith 0 shivs inside.
+you find a piece of body armor.
+you find a flashmine.
+you find a motion tracking device.
