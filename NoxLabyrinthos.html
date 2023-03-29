@@ -3,6 +3,7 @@
     <head>
         <title>Nox Labyrinthos</title>
         <base href=".">
+        <link rel="shortcut icon" href="#">
         <script src="Player.js"></script>
         <script src="Monster.js"></script>
         <script src="Captive.js"></script>
@@ -28,8 +29,9 @@
             //     game = new Game();
             // });
             buttonsDiv = document.querySelector('.buttons');
-            description = document.querySelector(".text").textContent;
+            description = document.querySelector(".text");
             buttonNames = ["pick up the revolver and open the door"];
+            desText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, tortor vel malesuada tincidunt, libero dolor bibendum ipsum, vel aliquet ipsum neque a felis. Fusce in felis quam. Pellentesque eu arcu ac enim dignissim semper quis a magna.";
 
             function createButtons() {
                 buttonsDiv.innerHTML = ''; // clear previous buttons
@@ -40,8 +42,12 @@
                         // Code to execute when a button is clicked
                         game.takeTurn(name);
                         buttonNames = game.getActionList();
-                        description = game.descriptionBuilder();
+                        desText = game.descriptionBuilder();
                         createButtons();
+                        description.innerHTML = '';
+                        const t = document.createElement('p');
+                        t.textContent = desText;
+                        description.appendChild(t);
                     });
                     buttonsDiv.appendChild(button);
                 });
