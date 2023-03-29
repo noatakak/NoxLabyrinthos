@@ -253,7 +253,7 @@ class Game {
                 this.playerLoc = this.player.move(2, this.playerLoc);
             }else if(playInput = "move down the hallway on your left"){ 
                 // left hall
-                this.playerLoc = this.player.move (3, this.playerLoc);
+                this.playerLoc = this.player.move(3, this.playerLoc);
             }else if(playInput = "move down the hallway on your right"){ 
                 // right hall
                 this.playerLoc = this.player.move(1, this.playerLoc);

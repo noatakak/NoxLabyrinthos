@@ -1,4 +1,4 @@
-class compass{  
+class Compass{  
     currentDirection;
 
     constructor(){

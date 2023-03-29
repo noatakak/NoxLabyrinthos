@@ -3,7 +3,7 @@ class Player{
     surviveChance;
     searchChance;
     captiveInParty;
-    compass
+    compass;
 
     gun;
     bulletCount;
@@ -20,6 +20,8 @@ class Player{
         this.surviveChance = survive;
         this.searchChance = search;
         this.captiveInParty = 0;
+
+        this.compass = new Compass();
         
         this.gun = true;
         this.bulletCount = 1;
@@ -42,8 +44,16 @@ class Player{
 
     move(direction, playerCords){
         //forward is index 0, right is 1, back is 2, left is 3
+        let compassDir = "";
+        for(let i = 0; i < this.compass.currentDirection.length; i++){
+            let node = this.compass.currentDirection.head;
+            if(i == direction){
+                compassDir = node.data;
+                break;
+            }
+            node = node.next;
+        }
         //set value at index to string compassDir
-        compassDir = "";
 
         //move in compassDir
         if(compassDir == "NORTH"){
