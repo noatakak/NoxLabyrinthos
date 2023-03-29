@@ -3,7 +3,7 @@ class Player{
     surviveChance;
     searchChance;
     captiveInParty;
-    currentDirection;
+    compass
 
     gun;
     bulletCount;
