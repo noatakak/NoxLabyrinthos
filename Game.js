@@ -1,4 +1,3 @@
-
 class Game {
 
     //        FIELDS        \\ 
@@ -216,16 +215,16 @@ class Game {
         let rightNeighbor =  this.start[1] < size-1 && this.gameMaze[this.start[0]][this.start[1]+1] == " ";
         if(topNeighbor){
             this.playerLoc = [this.playerLoc[0]-1, this.playerLoc[1]]
-            this.player.currentDirection = "NORTH";
+            this.player.compass.setCompass("NORTH");
         }else if(bottomNeighbor){
             this.playerLoc = [this.playerLoc[0]+1, this.playerLoc[1]]
-            this.player.currentDirection = "SOUTH";
+            this.player.compass.setCompass("SOUTH");
         }else if(leftNeighbor){
             this.playerLoc = [this.playerLoc[0], this.playerLoc[1]-1]
-            this.player.currentDirection = "WEST";
+            this.player.compass.setCompass("WEST");
         }else if(rightNeighbor){
             this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
-            this.player.currentDirection = "EAST";
+            this.player.compass.setCompass("EAST");
         }
     }
 
@@ -236,7 +235,7 @@ class Game {
 
     //called when a player places a mine
     placeMine(){
-        
+        this.gameMaze[this.playerLoc[0]][this.player[1]] = "m";
     }
 
     //called when the player presses a button
@@ -248,28 +247,28 @@ class Game {
         }else{
             if(playInput = "move down the hallway in front of you"){
                 // forward hall
-                this.playerLoc = this.player.moveForward(this.playerLoc);
+                this.playerLoc = this.player.move(0, this.playerLoc);
             }else if(playInput = "move down the hallway behind you"){ 
                 // backward hall
-                this.playerLoc = this.player.moveBackward(this.playerLoc);
+                this.playerLoc = this.player.move(2, this.playerLoc);
             }else if(playInput = "move down the hallway on your left"){ 
                 // left hall
-                this.playerLoc = this.player.moveLeft(this.playerLoc);
+                this.playerLoc = this.player.move (3, this.playerLoc);
             }else if(playInput = "move down the hallway on your right"){ 
                 // right hall
-                this.playerLoc = this.player.moveRight(this.playerLoc);
+                this.playerLoc = this.player.move(1, this.playerLoc);
             }else if(playInput = "enter the room in front of you"){ 
                 // forward room
-                this.playerLoc = this.player.moveForward(this.playerLoc);
+                this.playerLoc = this.player.move(0, this.playerLoc);
             }else if(playInput = "enter the room behind you"){ 
                 // back room
-                this.playerLoc = this.player.moveBackward(this.playerLoc);
+                this.playerLoc = this.player.move(2, this.playerLoc);
             }else if(playInput = "enter the room to your left"){ 
                 // left room
-                this.playerLoc = this.player.moveLeft(this.playerLoc);
+                this.playerLoc = this.player.move(3, this.playerLoc);
             }else if(playInput = "enter the room to your right"){ 
                 // back room
-                this.playerLoc = this.player.moveRight(this.playerLoc);
+                this.playerLoc = this.player.move(1, this.playerLoc);
             }else if(playInput = "search the room"){
                 // search room
                 this.searchRoom();

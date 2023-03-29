@@ -37,22 +37,29 @@ class Player{
     }
 
     addItem(){
-        
-    }
-
-    moveForward(playerCords){
 
     }
 
-    moveBackward(playerCords){
+    move(direction, playerCords){
+        //forward is index 0, right is 1, back is 2, left is 3
+        //set value at index to string compassDir
+        compassDir = "";
 
-    }
+        //move in compassDir
+        if(compassDir == "NORTH"){
+            let newPlayerCords = [playerCords[0]-1, newPlayerCords[1]];
+            this.compass.setCompass("NORTH");
+        }else if(compassDir == "EAST"){
+            let newPlayerCords = [playerCords[0], newPlayerCords[1]+1];
+            this.compass.setCompass("EAST");
+        }else if(compassDir == "SOUTH"){
+            let newPlayerCords = [playerCords[0]+1, newPlayerCords[1]];
+            this.compass.setCompass("SOUTH");
+        }else if(compassDir == "WEST"){
+            let newPlayerCords = [playerCords[0], newPlayerCords[1]-1];
+            this.compass.setCompass("WEST");
+        }
 
-    moveLeft(playerCords){
-
-    }
-
-    moveRight(playerCords){
-
+        return newPlayerCords
     }
 }
