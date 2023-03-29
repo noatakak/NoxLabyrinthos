@@ -13,6 +13,10 @@ class Game {
     flavorText;
     sounds;
     turn;
+    
+    // start and end courdinates, make sure to make a checker in the player turn method to ensure a win
+    start;
+    end;
     //maybe width and length fields
     //num of captives?
     //gameEnd and gameWon booleans and a checker?
@@ -78,7 +82,45 @@ class Game {
                 }
               }
         }
-        
+       
+        //runs two for loops through the rooms map and finds the two rooms that are furthest away from each other
+        //These rooms will then be used as start and end of the maze.
+        //
+        function stenRooms(){
+            idRoom1;
+            idRoom2;
+            farAway = 0;
+            roomCoords = [];
+
+            let size = maze.length
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if(maze[i][j] == "□") {
+                        //parse through the maze and add all room courdinates as an array 
+                        //to the room coord array
+                        tempArr = [i,j];
+                        roomCoords.push(tempArr);
+                    }
+                }
+              }
+
+            for(let i = 0; i < roomCoords.length; i++){
+                for(let j = 0; j < roomCoords.length; j++){
+                    manDistance = Math.abs(roomCoords[j][0] - roomCoords[i][0]) + Math.abs(roomCoord[j][1] - roomCoord[i][1])
+                    if( manDistance > farAway){
+                        farAway = manDistance;
+                        idRoom1 = roomCoords[i];
+                        idRoom2 = roomCoords[j];
+                    }
+                }
+            }
+
+            this.start = idRoom1;
+            this.end = idRoom2;
+    
+
+        }
+
         backtrack(Math.floor(Math.random() * rows), Math.floor(Math.random() * cols));
         genRooms(maze);
         return maze;
