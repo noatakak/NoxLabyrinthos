@@ -5,7 +5,7 @@ class Game {
     gameMaze;
     monLoc;
     capLoc;
-    playLoc;
+    playerLoc;
     monster;
     captives;
     player;
@@ -27,7 +27,7 @@ class Game {
         this.roomMap = this.genRooms(this.gameMaze);
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
-        this.playLoc = this.genPlayLoc();
+        this.playerLoc = this.genPlayLoc();
         this.monster = new Monster([0,0]);
         //might have to put a this keyword on the object
         this.captives = this.genCaptiveArray
@@ -35,6 +35,8 @@ class Game {
         this.flavorText = this.pullFlavorText
         this.sounds = null;
         this.turn = 0;
+        this.printMaze(this.gameMaze);
+        this.printMaze(this.gameMaze);
     }
 
 
@@ -173,11 +175,13 @@ class Game {
         return null;
     }
 
-    //generates a boolean array of the player location with true being where the player is.
+    //generates an array of the player location with true being where the player is.
     //randomly generates the player in a empty space somewhere near the edge of the board.
     genPlayLoc(){
-
-        return null;
+        // let playerArray = Object.assign({}, this.gameMaze);
+        // playerArray[this.start[0]][this.start[1]] = "P";
+        // return playerArray;
+        return this.start;
     }
 
     //makes a bunch of objects of type captive and puts them in a arraylist
@@ -202,7 +206,33 @@ class Game {
     //will call player action, monster action, captive action, discriptionbuilder method, and get action list
     //does not return anything
     takeTurn(playInput){
+        if(this.turn == 0){
+            let size = this.gameMaze.length;
+            let topNeighbor = this.start[0] > 0 && this.gameMaze[this.start[0]-1][this.start[1]] == " ";
+            let bottomNeighbor = this.start[0] < size-1 && this.gameMaze[this.start[0]+1][this.start[1]] == " ";
+            let leftNeighbor = this.start[1] > 0 && this.gameMaze[this.start[0]][this.start[1]-1] == " ";
+            let rightNeighbor =  this.start[1] < size-1 && this.gameMaze[this.start[0]][this.start[1]+1] == " ";
+            if(topNeighbor){
+                this.playerLoc = [this.playerLoc[0]-1, this.playerLoc[1]]
+                this.player.currentDirection = "NORTH";
+            }else if(bottomNeighbor){
+                this.playerLoc = [this.playerLoc[0]+1, this.playerLoc[1]]
+                this.player.currentDirection = "SOUTH";
+            }else if(leftNeighbor){
+                this.playerLoc = [this.playerLoc[0], this.playerLoc[1]-1]
+                this.player.currentDirection = "WEST";
+            }else if(rightNeighbor){
+                this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
+                this.player.currentDirection = "EAST";
+            }
 
+        }else{
+
+
+
+
+
+        }
         this.turn+=1;
         this.printMaze(this.gameMaze)
         return null;
