@@ -31,25 +31,26 @@ class DoublyLinkedList {
 
     // Add a new node to the end of the list
     append(data) {
-    const node = new Node(data);
+        const node = new Node(data);
 
-    if (!this.head) {
-        this.head = node;
-        this.tail = node;
-    } else {
-        node.prev = this.tail;
-        this.tail.next = node;
-        this.tail = node;
-        this.tail.next = head;
-    }
+        if (this.head == null) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.tail.next = node;
+            node.next = this.head;
+            node.prev = this.tail;
+            this.head.prev = node;
+            this.tail = node;
+        }
 
-    this.length++;
+        this.length++;
     }
 
     setHead(dir) {
         let currentNode = this.head;
         for(let i = 0; i < this.length; i++){
-            if(currentNode.data = dir){
+            if(currentNode.data == dir){
                 this.head = currentNode;
                 break;
             }
