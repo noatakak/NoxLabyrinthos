@@ -1,19 +1,20 @@
-move down the hallway on your left
-move down the hallway on your right
-move down the hallway in front of you
-move down the hallway behind you
+turn left and go down the hall
+turn right and go down the hall
+continue forward down the hall
+turn back and go down the hall
 
-enter the room to your left
-enter the room to your right
-enter the room in front of you
-enter the room behind you
+turn left and enter the room
+turn right and enter the room
+continue forward and enter the room
+turn back and enter the room
 
 search the room
+rest in the room
 leave the room
 
-shoot down the hallway on your left
-shoot down the hallway on your right
-shoot down the hallway in front of you
-shoot down the hallway behind you
+look forward and fire your revolver
+turn right and fire your revolver
+turn back and fire your revovler
+turn left and fire your revovler
 
 place a flash mine on the ground

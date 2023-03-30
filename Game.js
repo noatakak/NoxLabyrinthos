@@ -252,56 +252,59 @@ class Game {
         if(this.turn == 0){
             this.leaveRoom();
         }else{
-            if(playInput == "move down the hallway in front of you"){
+            if(playInput == "continue forward down the hall"){
                 // forward hall
                 this.playerLoc = this.player.move(0, this.playerLoc);
                 this.sounds.push("you walk down the hallway in front of you.");
             
-            }else if(playInput == "move down the hallway behind you"){ 
+            }else if(playInput == "turn back and go down the hall"){ 
                 // backward hall
                 this.playerLoc = this.player.move(2, this.playerLoc);
                 this.sounds.push("you walk down the hallway behind you.");
 
-            }else if(playInput == "move down the hallway on your left"){ 
+            }else if(playInput == "turn left and go down the hall"){ 
                 // left hall
                 this.playerLoc = this.player.move(3, this.playerLoc);
                 this.sounds.push("you walk down the hallway to your left.");
 
-            }else if(playInput == "move down the hallway on your right"){ 
+            }else if(playInput == "turn right and go down the hall"){ 
                 // right hall
                 this.playerLoc = this.player.move(1, this.playerLoc);
                 this.sounds.push("you walk down the hallway to your right");
 
-            }else if(playInput == "enter the room in front of you"){ 
+            }else if(playInput == "continue forward and enter the room"){ 
                 // forward room
                 this.playerLoc = this.player.move(0, this.playerLoc);
                 this.sounds.push("you enter the room in front of you.")
 
-            }else if(playInput == "enter the room behind you"){ 
+            }else if(playInput == "turn back and enter the room"){ 
                 // back room
                 this.playerLoc = this.player.move(2, this.playerLoc);
-            }else if(playInput == "enter the room to your left"){ 
+
+            }else if(playInput == "turn left and enter the room"){ 
                 // left room
                 this.playerLoc = this.player.move(3, this.playerLoc);
-            }else if(playInput == "enter the room to your right"){ 
+
+            }else if(playInput == "turn right and enter the room"){ 
                 // back room
                 this.playerLoc = this.player.move(1, this.playerLoc);
+
             }else if(playInput == "search the room"){
                 // search room
                 this.sounds.push(this.searchRoom());
             }else if(playInput == "leave the room"){
                 // leave room
                 this.leaveRoom();
-            }else if(playInput == "shoot down the hallway in front of you"){ 
+            }else if(playInput == "look forward and fire your revolver"){ 
                 // shoot forward
                 this.gunshot("FORWARD");
-            }else if(playInput == "shoot down the hallway behind you"){ 
+            }else if(playInput == "turn back and fire your revovler"){ 
                 // shoot backward
                 this.gunshot("BACKWARD");
-            }else if(playInput == "shoot down the hallway on your left"){ 
+            }else if(playInput == "turn left and fire your revovler"){ 
                 // shoot left
                 this.gunshot("LEFT")
-            }else if(playInput == "shoot down the hallway on your right"){ 
+            }else if(playInput == "turn right and fire your revolver"){ 
                 // shoot right
                 this.gunshot("RIGHT");
             }else if(playInput == "place a flash mine on the ground"){
@@ -404,7 +407,7 @@ class Game {
         if(this.turn == 0){
             availActions.push("pick up the revolver and open the door")
             return availActions;
-        }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get([this.playerLoc]) != "empty"){
+        }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get(this.playerLoc) != "empty"){
                 return ["search the room", "leave the room"];
         }
         else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□"){
@@ -431,13 +434,13 @@ class Game {
             for(let i = 0; i < arr.length; i++){
                 if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
                     if(i == 0){
-                        availActions.push("move down the hallway in front of you");
+                        availActions.push("continue forward down the hall");
                     }else if(i == 1){
-                        availActions.push("move down the hallway on your right");
+                        availActions.push("turn right and go down the hall");
                     }else if(i == 2){
-                        availActions.push("move down the hallway behind you");
+                        availActions.push("turn back and go down the hall");
                     }else if(i == 3){
-                        availActions.push("move down the hallway on your left");
+                        availActions.push("turn left and go down the hall");
                     }
                 }
             }
@@ -445,13 +448,13 @@ class Game {
             for(let i = 0; i < arr.length; i++){
                 if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == "□"){
                     if(i == 0){
-                        availActions.push("enter the room in front of you");
+                        availActions.push("continue forward and enter the room");
                     }else if(i == 1){
-                        availActions.push("enter the room to your right");
+                        availActions.push("turn right and enter the room");
                     }else if(i == 2){
-                        availActions.push("enter the room behind you");
+                        availActions.push("turn back and enter the room");
                     }else if(i == 3){
-                        availActions.push("enter the room to your left");
+                        availActions.push("turn left and enter the room");
                     }
                 }
             }
@@ -460,13 +463,13 @@ class Game {
                 for(let i = 0; i < arr.length; i++){
                     if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
                         if(i == 0){
-                            availActions.push("shoot down the hallway in front of you");
+                            availActions.push("look forward and fire your revolver");
                         }else if(i == 1){
-                            availActions.push("shoot down the hallway on your right");
+                            availActions.push("turn right and fire your revolver");
                         }else if(i == 2){
-                            availActions.push("shoot down the hallway behind you");
+                            availActions.push("turn back and fire your revovler");
                         }else if(i == 3){
-                            availActions.push("shoot down the hallway on your left");
+                            availActions.push("turn left and fire your revovler");
                         }
                     }
                 }
