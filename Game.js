@@ -39,6 +39,7 @@ class Game {
         this.turn = 0;
         this.printMaze(this.gameMaze);
         this.printMaze(this.gameMaze);
+        this.lastMove = null;
     }
 
 
@@ -313,7 +314,7 @@ class Game {
                 this.sounds.push(this.placeMine());
             }
         }
-        lastMove = playInput;
+        this.lastMove = playInput;
         this.monsterAction();
         this.captiveAction();
         //make encounter check
@@ -398,11 +399,11 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        description = null;
+        description = "new text";
         
 
         
-        description = sounds.join(" ");
+        //description = sounds.join(" ");
 
         return description;
     }
