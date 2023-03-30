@@ -42,7 +42,7 @@ class Player{
         let des = "";
         if(item == "flashlight"){
             this.flashlight = true;
-        }else if(item == machete){
+        }else if(item == "machete"){
             this.machete = true;
         }else if(item == "body armor"){
             this.bodyArmor = true;
@@ -63,8 +63,8 @@ class Player{
     move(direction, playerCords){
         //forward is index 0, right is 1, back is 2, left is 3
         let compassDir = "";
+        let node = this.compass.currentDirection.head;
         for(let i = 0; i < this.compass.currentDirection.length; i++){
-            let node = this.compass.currentDirection.head;
             if(i == direction){
                 compassDir = node.data;
                 break;

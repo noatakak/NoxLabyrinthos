@@ -42,6 +42,7 @@
                     button.addEventListener('click', () => {
                         // Code to execute when a button is clicked
                         game.takeTurn(name);
+                        console.log(game.playerLoc);
                         buttonNames = game.getActionList();
                         desText = game.descriptionBuilder();
                         createButtons();
