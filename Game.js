@@ -13,6 +13,7 @@ class Game {
     sounds;
     turn;
     roomMap;
+    lastMove;
     // start and end courdinates, make sure to make a checker in the player turn method to ensure a win
     start;
     end;
@@ -35,9 +36,9 @@ class Game {
         this.player = new Player(.5, .5, .5);
         this.flavorText = this.pullFlavorText
         this.sounds = [];
-        this.printMaze(this.gameMaze);
-        console.log(this.playerLoc);
         this.turn = 0;
+        this.printMaze(this.gameMaze);
+        this.printMaze(this.gameMaze);
     }
 
 
@@ -292,7 +293,7 @@ class Game {
             }else if(playInput == "search the room"){
                 // search room
                 this.sounds.push(this.searchRoom());
-            }else if(playInput == "leave the room"){
+            }else if(playInput = "leave the room"){
                 // leave room
                 this.leaveRoom();
             }else if(playInput == "look forward and fire your revolver"){ 
@@ -307,11 +308,12 @@ class Game {
             }else if(playInput == "turn right and fire your revolver"){ 
                 // shoot right
                 this.gunshot("RIGHT");
-            }else if(playInput == "place a flash mine on the ground"){
+            }else if(playInput = "place a flash mine on the ground"){
                 // place flash mine
                 this.sounds.push(this.placeMine());
             }
         }
+        lastMove = playInput;
         this.monsterAction();
         this.captiveAction();
         //make encounter check
@@ -333,7 +335,7 @@ class Game {
         //do the coin flip then execute the if statement
 
         if(captiveKilled){
-            noise += "You hear a scream as another captive loses their life, and the manaical laughing of a freshly made killer";
+            noise += "you hear a scream as another captive loses their life, and the manaical laughing of a freshly made killer rings through the labyrinth.";
             //Make sure to decrease the captive counts for one of the objects and set to null if captive count hits 0;
             //create a body and call the update maze method
         }
@@ -346,7 +348,7 @@ class Game {
     //update the behavior of the rest of the captive group, somehow.
     //returns the noise of the monster killing a captive
     capMonEnc(cap,mon){
-        this.noise = "You hear a scream and a roar as the Monster devours another victim.";
+        this.noise = "you hear a scream and a roar as the monster devours another victim.";
         //decrement the captive object and set it to null if the capcount = 0 
         //Maybe this has the monster occupied for a turn or two?
         //create a body and call the update maze method
@@ -396,7 +398,13 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        return "new text";
+        description = null;
+        
+
+        
+        description = sounds.join(" ");
+
+        return description;
     }
 
     // Feeds into the frount end for player choice.
@@ -410,7 +418,7 @@ class Game {
         }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get(this.playerLoc) != "empty"){
                 return ["search the room", "leave the room"];
         }
-        else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□"){
+        else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
                 return ["rest in the room", "leave the room"];
         }else{
 
@@ -425,14 +433,14 @@ class Game {
                 }else if(node.data == "SOUTH"){
                     arr.push([this.playerLoc[0]+1, this.playerLoc[1]]);
                 }else if(node.data == "WEST"){
-                    arr.push([this.playerLoc[0], this.playerLoc[1]-1]);
+                    arr.push([this.playerLoc[0], this.playerLoc[1] -1]);
                 }
                 node = node.next;
             }
             
             let size = this.gameMaze.length;
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
+                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0]][[arr[i][1]]] == "c"){
                     if(i == 0){
                         availActions.push("continue forward down the hall");
                     }else if(i == 1){
@@ -446,7 +454,7 @@ class Game {
             }
             
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == "□"){
+                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == "□"){
                     if(i == 0){
                         availActions.push("continue forward and enter the room");
                     }else if(i == 1){
@@ -461,7 +469,7 @@ class Game {
             
             if(this.player.gun && this.player.bulletCount > 0){
                 for(let i = 0; i < arr.length; i++){
-                    if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
+                    if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0][arr[i][1]]] == "c"){
                         if(i == 0){
                             availActions.push("look forward and fire your revolver");
                         }else if(i == 1){
