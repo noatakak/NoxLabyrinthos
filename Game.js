@@ -252,6 +252,7 @@ class Game {
     //will call player action, monster action, captive action, discriptionbuilder method, and get action list
     //does not return anything
     takeTurn(playInput){
+        this.sounds = [];
         if(this.turn == 0){
             this.leaveRoom();
         }else{
@@ -414,9 +415,19 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        let desc = null;
+        desc = null;
         
+        //shooting flavor text
+        if(this.lastMove.includes("revolver")){
 
+        }//movement flavor text
+        else if((this.lastMove.includes("turn") || this.lastMove.includes("continue")) && this.lastMove.includes("hall")){
+
+        }//entering room flavor text
+        else if((this.lastMove.includes("continue") || this.lastMove.includes("turn")) && this.lastMove.includes("room")){
+
+        }
+        
         
         desc = this.sounds.join(" ");
 
@@ -491,9 +502,9 @@ class Game {
                         }else if(i == 1){
                             availActions.push("turn right and fire your revolver");
                         }else if(i == 2){
-                            availActions.push("turn back and fire your revovler");
+                            availActions.push("turn back and fire your revolver");
                         }else if(i == 3){
-                            availActions.push("turn left and fire your revovler");
+                            availActions.push("turn left and fire your revolver");
                         }
                     }
                 }
