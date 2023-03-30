@@ -395,6 +395,8 @@ class Game {
 
 
     //AI for the monster, find manhatten distance of all the prey, breadth first search to find a path.
+    //make sure to ignore player when in a room
+    //move randomly if all captives dead and player is in a room
     //update the monster array in the direction it chooses to go.
     //does not need to return anything
     monsterAction(){
@@ -412,6 +414,9 @@ class Game {
 
     //check the maze array around you, if statements and include player visibility value as conditionals to improve detail.
     //check if you see movement 
+    //randomize when flavor text is called
+    //write flavor text statements
+    //write a visibility loop checking in the dark and not to include statements about what you see movementwise
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
@@ -425,6 +430,12 @@ class Game {
 
         }//entering room flavor text
         else if((this.lastMove.includes("continue") || this.lastMove.includes("turn")) && this.lastMove.includes("room")){
+
+        }//resting in the room
+        else if(this.lastMove.includes("rest") && this.lastMove.includes("room")){
+
+        }//placing a flashmine
+        else if(this.lastMove.includes("flash") && this.lastMove.includes("mine") && this.lastMove.includes("ground")){
 
         }
         
