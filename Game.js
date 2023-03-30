@@ -399,13 +399,13 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        description = "new text";
+        desc = null;
         
 
         
-        //description = sounds.join(" ");
+        desc = sounds.join(" ");
 
-        return description;
+        return desc;
     }
 
     // Feeds into the frount end for player choice.
