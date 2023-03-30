@@ -415,7 +415,7 @@ class Game {
     //call flavor text every once in a while as you walk in empty spaces at random intervals. 
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
-        desc = null;
+        let desc = null;
         
         //shooting flavor text
         if(this.lastMove.includes("revolver")){
