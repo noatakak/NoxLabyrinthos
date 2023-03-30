@@ -224,6 +224,7 @@ class Game {
             this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
             this.player.compass.setCompass("EAST");
         }
+        this.sounds.push("you open the door and step out of room.")
     }
 
     //called when a player shoots their revolver
@@ -282,36 +283,50 @@ class Game {
             }else if(playInput == "turn back and enter the room"){ 
                 // back room
                 this.playerLoc = this.player.move(2, this.playerLoc);
+                this.sounds.push("you enter the room behind you.");
 
             }else if(playInput == "turn left and enter the room"){ 
                 // left room
                 this.playerLoc = this.player.move(3, this.playerLoc);
+                this.sounds.push("you enter the room to your left.")
 
             }else if(playInput == "turn right and enter the room"){ 
                 // back room
                 this.playerLoc = this.player.move(1, this.playerLoc);
+                this.sounds.push("you enter the room to your right.")
 
             }else if(playInput == "search the room"){
                 // search room
                 this.sounds.push(this.searchRoom());
-            }else if(playInput = "leave the room"){
+
+            }else if(playInput == "leave the room"){
                 // leave room
                 this.leaveRoom();
+
+            }else if(playInput == "rest in the room"){
+                // leave room
+                this.sounds.push("you take a moment to rest.")
+
             }else if(playInput == "look forward and fire your revolver"){ 
                 // shoot forward
                 this.gunshot("FORWARD");
+
             }else if(playInput == "turn back and fire your revovler"){ 
                 // shoot backward
                 this.gunshot("BACKWARD");
+
             }else if(playInput == "turn left and fire your revovler"){ 
                 // shoot left
-                this.gunshot("LEFT")
+                this.gunshot("LEFT");
+
             }else if(playInput == "turn right and fire your revolver"){ 
                 // shoot right
                 this.gunshot("RIGHT");
+
             }else if(playInput = "place a flash mine on the ground"){
                 // place flash mine
                 this.sounds.push(this.placeMine());
+
             }
         }
         this.lastMove = playInput;
@@ -419,7 +434,7 @@ class Game {
         }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get(this.playerLoc) != "empty"){
                 return ["search the room", "leave the room"];
         }
-        else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
+        else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□"&& this.roomMap.get(this.playerLoc) == "empty"){
                 return ["rest in the room", "leave the room"];
         }else{
 
@@ -441,7 +456,7 @@ class Game {
             
             let size = this.gameMaze.length;
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0]][[arr[i][1]]] == "c"){
+                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
                     if(i == 0){
                         availActions.push("continue forward down the hall");
                     }else if(i == 1){
@@ -455,7 +470,7 @@ class Game {
             }
             
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == "□"){
+                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == "□"){
                     if(i == 0){
                         availActions.push("continue forward and enter the room");
                     }else if(i == 1){
@@ -470,7 +485,7 @@ class Game {
             
             if(this.player.gun && this.player.bulletCount > 0){
                 for(let i = 0; i < arr.length; i++){
-                    if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0][arr[i][1]]] == "c"){
+                    if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
                         if(i == 0){
                             availActions.push("look forward and fire your revolver");
                         }else if(i == 1){
