@@ -24,6 +24,8 @@ class Game {
     constructor(){
         this.gameMaze = this.genMaze(15,15);
         this.roomMap = this.genRooms(this.gameMaze);
+        this.roomMap.set(this.start, "empty");
+        this.roomMap.set(this.end, "empty");
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playerLoc = this.start;
@@ -400,7 +402,7 @@ class Game {
         }else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
                 return ["search the room", "leave the room"];
         }
-        else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□" && this.roomMap.get([this.playerLoc[0],this.playerLoc[1]] == "empty")){
+        else if(this.gameMaze[this.playerLoc[0],this.playerLoc[1]] == "□"){
                 return ["rest in the room", "leave the room"];
         }else{
 
@@ -435,7 +437,6 @@ class Game {
                 }
             }
             
-            size = this.gameMaze.length;
             for(let i = 0; i < arr.length; i++){
                 if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == "□"){
                     if(i == 0){
@@ -450,17 +451,18 @@ class Game {
                 }
             }
             
-            size = this.gameMaze.length;
-            for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0][arr[i][1]]] == "c"){
-                    if(i == 0){
-                        availActions.push("shoot down the hallway in front of you");
-                    }else if(i == 1){
-                        availActions.push("shoot down the hallway on your right");
-                    }else if(i == 2){
-                        availActions.push("shoot down the hallway behind you");
-                    }else if(i == 3){
-                        availActions.push("shoot down the hallway on your left");
+            if(this.player.gun && this.player.bulletCount > 0){
+                for(let i = 0; i < arr.length; i++){
+                    if(arr[i][0] > 0 && arr[i][0] < size -1 && arr[i][1] > 0 && arr[i][0] < size -1 && this.gameMaze[arr[i][0]][[arr[i][1]]] == " " || this.gameMaze[arr[i][0][arr[i][1]]] == "c"){
+                        if(i == 0){
+                            availActions.push("shoot down the hallway in front of you");
+                        }else if(i == 1){
+                            availActions.push("shoot down the hallway on your right");
+                        }else if(i == 2){
+                            availActions.push("shoot down the hallway behind you");
+                        }else if(i == 3){
+                            availActions.push("shoot down the hallway on your left");
+                        }
                     }
                 }
             }
