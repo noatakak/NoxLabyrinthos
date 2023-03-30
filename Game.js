@@ -25,8 +25,8 @@ class Game {
     constructor(){
         this.gameMaze = this.genMaze(15,15);
         this.roomMap = this.genRooms(this.gameMaze);
-        this.roomMap.set(this.start, "empty");
-        this.roomMap.set(this.end, "empty");
+        this.roomMap.set(this.start.toString(), "empty");
+        this.roomMap.set(this.end.toString(), "empty");
         this.monLoc = this.genMonLoc();
         this.capLoc = this.genCapLoc();
         this.playerLoc = this.start;
@@ -146,7 +146,7 @@ class Game {
                 }
                 if(isRoom){
                     maze[i][j] = "□";
-                    roomMap.set([i,j], this.genItem());
+                    roomMap.set([i,j].toString(), this.genItem());
                 }
             }
         }
@@ -198,7 +198,7 @@ class Game {
     searchRoom(){
         let searchDescription = this.player.addItem(this.roomMap.get(this.playerLoc));
 
-        this.roomMap.set(this.playerLoc, "empty");
+        this.roomMap.set(this.playerLoc.toString(), "empty");
 
         //TODO make search description
         return searchDescription;
@@ -365,7 +365,7 @@ class Game {
     //update the behavior of the rest of the captive group, somehow.
     //returns the noise of the monster killing a captive
     capMonEnc(cap,mon){
-        this.noise = "you hear a scream and a roar as the monster devours another victim.";
+        this.noise = "you hear a scream and a roar as the monster devours a victim.";
         //decrement the captive object and set it to null if the capcount = 0 
         //Maybe this has the monster occupied for a turn or two?
         //create a body and call the update maze method
@@ -442,10 +442,10 @@ class Game {
         if(this.turn == 0){
             availActions.push("pick up the revolver and open the door")
             return availActions;
-        }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get(this.playerLoc) != "empty"){
+        }else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□" && this.roomMap.get(this.playerLoc.toString()) != "empty"){
                 return ["search the room", "leave the room"];
         }
-        else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□"&& this.roomMap.get(this.playerLoc) == "empty"){
+        else if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] == "□"&& this.roomMap.get(this.playerLoc.toString()) == "empty"){
                 return ["rest in the room", "leave the room"];
         }else{
 
@@ -467,7 +467,7 @@ class Game {
             
             let size = this.gameMaze.length;
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
+                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
                     if(i == 0){
                         availActions.push("continue forward down the hall");
                     }else if(i == 1){

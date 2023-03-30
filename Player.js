@@ -42,20 +42,36 @@ class Player{
         let des = "";
         if(item == "flashlight"){
             this.flashlight = true;
+            des = "you find a flashflight sitting in the corner.";
+            if(this.batteryCount > 0){
+                des+=" you put a battery that you found earlier inside the light and the light shines even brigher."
+            }
         }else if(item == "machete"){
             this.machete = true;
+            des = "you find a machete stuck into the wall of the room.";
         }else if(item == "body armor"){
             this.bodyArmor = true;
+            des = "you find a piece of body armor leaning against a wall."
         }else if(item == "motion tracker"){
             this.motionTracker = true;
+            des = "you find a box with a motion tracker inside. this will prove very useful."
         }else if(item == "bullet"){
             this.bulletCount+=1;
+            des = "you find a single bullet on a small table.";
         }else if(item == "battery"){
             this.batteryCount+=1;
+            des = "you find a battery on a small table.";
+            if(!flashlight){
+                des+=" it looks like it would fit in a flashlight.";
+            }else if(flashlight && this.batteryCount == 1){
+                des+=" you slot the new battery into your flashlight and it shines even brighgter than before."
+            }
         }else if(item == "shiv"){
             this.shivCount+=1;
+            des = "you find a shiv in the corner."
         }else if(item == "flash mine"){
             this.flashMineCount+=1;
+            des = "you find an unactive flashmine on the ground. this could be helpful."
         }
         return des;
     }
