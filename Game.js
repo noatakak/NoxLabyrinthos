@@ -480,11 +480,11 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1] && clearViz > 0){
-                desc.push("");
+                desc+=("");
                 break;
             }//Monster dark
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1]){
-                desc.push("");
+                desc+=("");
                 break;
             }//now i check captives 
 
@@ -492,11 +492,11 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1] && clearViz > 0){
-                    desc.push("");
+                    desc+=("");
                     break upLoop;
                 }// dark
                 else if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1]){
-                    desc.push("");
+                    desc+=("");
                     break upLoop;
                 }
             }
@@ -516,11 +516,11 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1] && clearViz > 0){
-                desc.push("");
+                desc+=("");
                 break;
             }//Monster dark
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1]){
-                desc.push("");
+                desc+=("");
                 break;
             }//now i check captives 
 
@@ -528,11 +528,11 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1] && clearViz > 0){
-                    desc.push("");
+                    desc+=("");
                     break rightLoop;
                 }// dark
                 else if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1]){
-                    desc.push("");
+                    desc+=("");
                     break rightLoop;
                 }
             }
@@ -552,11 +552,11 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1] && clearViz > 0){
-                desc.push("");
+                desc+=("");
                 break;
             }//Monster dark
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1]){
-                desc.push("");
+                desc+=("");
                 break;
             }//now i check captives 
 
@@ -564,11 +564,11 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1] && clearViz > 0){
-                    desc.push("");
+                    desc+=("");
                     break downLoop;
                 }// dark
                 else if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1]){
-                    desc.push("");
+                    desc+=("");
                     break downLoop;
                 }
             }
@@ -588,11 +588,11 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1] && clearViz > 0){
-                desc.push("");
+                desc+=("");
                 break;
             }//Monster dark
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1]){
-                desc.push("");
+                desc+=("");
                 break;
             }//now i check captives 
 
@@ -600,11 +600,11 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1] && clearViz > 0){
-                    desc.push("");
+                    desc+=("");
                     break leftLoop;
                 }// dark
                 else if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1]){
-                    desc.push("");
+                    desc+=("");
                     break leftLoop;
                 }
             }
