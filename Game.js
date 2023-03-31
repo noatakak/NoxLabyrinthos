@@ -423,7 +423,14 @@ class Game {
     //update the monster array in the direction it chooses to go.
     //does not need to return anything
     monsterAction(){
+        let max = -1;
+        let target = [-1,-1];
+        for (let i = 0; i < this.captiveList; i++) {
+            
+        }
+        if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] != "□"){
 
+        }
     }
 
     //Need two behaviors, exploration and escape from monster
@@ -432,7 +439,15 @@ class Game {
     //During the escape it will be moving in the direction away from the monster maximize manhattan distance between it and the monster. 
     //run a for loop through the captive arraylist to make these decisions.
     captiveAction(){
-
+        for(let cap in this.captiveList) {
+            if(!cap.escaping){
+                //check visibility
+                //if clear then move randomly
+                //if not clear then move in direction of the thing seen
+            }else{
+                //pick option that maximizes manhatten distance between captive and monster
+            }
+        }
     }
 
     //check the maze array around you, if statements and include player visibility value as conditionals to improve detail.
