@@ -1,11 +1,11 @@
 class Captive{
-    xLoc;
-    yLoc;
+    row;
+    col;
     captiveCount;
     
     constructor(x, y) {
-        this.xLoc = x;
-        this.yLoc = y;
+        this.row = x;
+        this.col = y;
         this.captiveCount = 1;
     }
 
