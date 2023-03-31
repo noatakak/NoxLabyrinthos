@@ -465,6 +465,7 @@ class Game {
         let coordLeft = [this.playerLoc[0],this.playerLoc[1]-1];
         let currCaptive = null;
         let clearViz = this.player.visibility;
+        let perpString = "";
 
         desc = this.sounds.join(" ");
 
@@ -480,11 +481,15 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1] && clearViz > 0){
-                desc+=("");
+                perpString += player.perspective("NORTH")
+                perpString += "you see a monster that is so horrific it can't be described."
+                desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1]){
-                desc+=("");
+                perpString += player.perspective("NORTH")
+                perpString += "you see a lumbering shadow."
+                desc+=perpString;
                 break;
             }//now i check captives 
 
@@ -492,11 +497,15 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1] && clearViz > 0){
-                    desc+=("");
+                    perpString += player.perspective("NORTH")
+                    perpString += "you see a captive in a straight jacket."
+                    desc+=perpString;
                     break upLoop;
                 }// dark
                 else if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1]){
-                    desc+=("");
+                    perpString += player.perspective("NORTH")
+                    perpString += "you see a shadow moving about."
+                    desc+=perpString;
                     break upLoop;
                 }
             }
@@ -504,6 +513,7 @@ class Game {
             coordUp[0] = coordUp[0] - 1;
         }
 
+        perpString = "";
         clearViz = this.player.visibility;
         //check right
         rightLoop:
@@ -516,11 +526,15 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1] && clearViz > 0){
-                desc+=("");
+                perpString += player.perspective("EAST")
+                perpString += "you see a monster that is so horrific it can't be described."
+                desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1]){
-                desc+=("");
+                perpString += player.perspective("EAST")
+                perpString += "you see a lumbering shadow."
+                desc+=perpString;
                 break;
             }//now i check captives 
 
@@ -528,11 +542,15 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1] && clearViz > 0){
-                    desc+=("");
+                    perpString += player.perspective("EAST")
+                    perpString += "you see a captive in a straight jacket."
+                    desc+=perpString;
                     break rightLoop;
                 }// dark
                 else if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1]){
-                    desc+=("");
+                    perpString += player.perspective("EAST")
+                    perpString += "you see a shadow moving about."
+                    desc+=perpString;
                     break rightLoop;
                 }
             }
@@ -540,6 +558,7 @@ class Game {
             coordRight[1] = coordRight[1] + 1;
         }
 
+        perpString = "";
         clearViz = this.player.visibility;
         //check down
         downLoop:
@@ -552,11 +571,15 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1] && clearViz > 0){
-                desc+=("");
+                perpString += player.perspective("SOUTH")
+                perpString += "you see a monster that is so horrific it can't be described."
+                desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1]){
-                desc+=("");
+                perpString += player.perspective("SOUTH")
+                perpString += "you see a lumbering shadow."
+                desc+=perpString;
                 break;
             }//now i check captives 
 
@@ -564,11 +587,15 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1] && clearViz > 0){
-                    desc+=("");
+                    perpString += player.perspective("SOUTH")
+                    perpString += "you see a captive in a straight jacket."
+                    desc+=perpString;
                     break downLoop;
                 }// dark
                 else if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1]){
-                    desc+=("");
+                    perpString += player.perspective("SOUTH")
+                    perpString += "you see a shadow moving about."
+                    desc+=perpString;
                     break downLoop;
                 }
             }
@@ -576,6 +603,7 @@ class Game {
             coordDown[0] = coordDown[0] + 1;
         }
 
+        perpString = "";
         clearViz = this.player.visibility;
         //check left
         leftLoop:
@@ -588,11 +616,15 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1] && clearViz > 0){
-                desc+=("");
+                perpString += player.perspective("WEST")
+                perpString += "you see a monster that is so horrific it can't be described."
+                desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1]){
-                desc+=("");
+                perpString += player.perspective("WEST")
+                perpString += "you see a lumbering shadow."
+                desc+=perpString;
                 break;
             }//now i check captives 
 
@@ -600,11 +632,15 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1] && clearViz > 0){
-                    desc+=("");
+                    perpString += player.perspective("WEST")
+                    perpString += "you see a captive in a straight jacket."
+                    desc+=perpString;
                     break leftLoop;
                 }// dark
                 else if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1]){
-                    desc+=("");
+                    perpString += player.perspective("WEST")
+                    perpString += "you see a shadow moving about."
+                    desc+=perpString;
                     break leftLoop;
                 }
             }
