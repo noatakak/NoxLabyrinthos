@@ -4,6 +4,7 @@ class Captive{
     captiveCount;
     escaping;
     escapeCount;
+    spotted;
     
     constructor(x, y) {
         this.row = x;
@@ -11,6 +12,7 @@ class Captive{
         this.captiveCount = 1;
         this.escaping = false;
         this.escapeCount = 0;
+        this.spotted = false;
     }
 
     setcaptiveCount(){
@@ -19,6 +21,6 @@ class Captive{
     }
 
     checkVisibility(){
-        
+
     }
 }

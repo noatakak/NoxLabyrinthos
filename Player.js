@@ -67,7 +67,7 @@ class Player{
         }else if(item == "battery"){
             this.batteryCount+=1;
             des = "you find a battery on a small table.";
-            if(!flashlight){
+            if(!this.flashlight){
                 des+=" it looks like it would fit in a flashlight.";
             }else if(flashlight && this.batteryCount == 1){
                 des+=" you slot the new battery into your flashlight and it shines even brighter than before."

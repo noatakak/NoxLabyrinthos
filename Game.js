@@ -230,20 +230,20 @@ class Game {
     //called when the player wants to leave their current room
     leaveRoom(){
         let size = this.gameMaze.length;
-        let topNeighbor = this.start[0] > 0 && this.gameMaze[this.start[0]-1][this.start[1]] == " ";
-        let bottomNeighbor = this.start[0] < size-1 && this.gameMaze[this.start[0]+1][this.start[1]] == " ";
-        let leftNeighbor = this.start[1] > 0 && this.gameMaze[this.start[0]][this.start[1]-1] == " ";
-        let rightNeighbor =  this.start[1] < size-1 && this.gameMaze[this.start[0]][this.start[1]+1] == " ";
-        if(topNeighbor){
+        let topSpace =    this.playerLoc[0] > 0 && this.gameMaze[this.playerLoc[0]-1][this.playerLoc[1]] == " ";
+        let bottomSpace = this.playerLoc[0] < size-1 && this.gameMaze[this.playerLoc[0]+1][this.playerLoc[1]] == " ";
+        let leftSpace =   this.playerLoc[1] > 0 && this.gameMaze[this.playerLoc[0]][this.playerLoc[1]-1] == " ";
+        let rightSpace =  this.playerLoc[1] < size-1 && this.gameMaze[this.playerLoc[0]][this.playerLoc[1]+1] == " ";
+        if(topSpace){
             this.playerLoc = [this.playerLoc[0]-1, this.playerLoc[1]]
             this.player.compass.setCompass("NORTH");
-        }else if(bottomNeighbor){
+        }else if(bottomSpace){
             this.playerLoc = [this.playerLoc[0]+1, this.playerLoc[1]]
             this.player.compass.setCompass("SOUTH");
-        }else if(leftNeighbor){
+        }else if(leftSpace){
             this.playerLoc = [this.playerLoc[0], this.playerLoc[1]-1]
             this.player.compass.setCompass("WEST");
-        }else if(rightNeighbor){
+        }else if(rightSpace){
             this.playerLoc = [this.playerLoc[0], this.playerLoc[1]+1]
             this.player.compass.setCompass("EAST");
         }
@@ -425,10 +425,10 @@ class Game {
     monsterAction(){
         let max = -1;
         let target = [-1,-1];
-        for (let i = 0; i < this.captiveList; i++) {
+        for (let i = 0; i < this.captiveList; i++) {// find the distance of the closest captive
             
         }
-        if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] != "□"){
+        if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] != "□"){ //if player is not in a room see if player is closer than closest captive
 
         }
     }
@@ -440,12 +440,14 @@ class Game {
     //run a for loop through the captive arraylist to make these decisions.
     captiveAction(){
         for(let cap in this.captiveList) {
-            if(!cap.escaping){
+            if(cap.escaping){
+                //pick option that maximizes manhatten distance between captive and monster
+            }else if(cap.spotted){
+                //stay still
+            }else{
                 //check visibility
                 //if clear then move randomly
                 //if not clear then move in direction of the thing seen
-            }else{
-                //pick option that maximizes manhatten distance between captive and monster
             }
         }
     }
@@ -481,13 +483,13 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1] && clearViz > 0){
-                perpString += player.perspective("NORTH")
+                perpString += this.player.perspective("NORTH")
                 perpString += "you see a monster that is so horrific it can't be described."
                 desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1]){
-                perpString += player.perspective("NORTH")
+                perpString += this.player.perspective("NORTH")
                 perpString += "you see a lumbering shadow."
                 desc+=perpString;
                 break;
@@ -497,13 +499,13 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1] && clearViz > 0){
-                    perpString += player.perspective("NORTH")
+                    perpString += this.player.perspective("NORTH")
                     perpString += "you see a captive in a straight jacket."
                     desc+=perpString;
                     break upLoop;
                 }// dark
                 else if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1]){
-                    perpString += player.perspective("NORTH")
+                    perpString += this.player.perspective("NORTH")
                     perpString += "you see a shadow moving about."
                     desc+=perpString;
                     break upLoop;
@@ -526,13 +528,13 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1] && clearViz > 0){
-                perpString += player.perspective("EAST")
+                perpString += this.player.perspective("EAST")
                 perpString += "you see a monster that is so horrific it can't be described."
                 desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1]){
-                perpString += player.perspective("EAST")
+                perpString += this.player.perspective("EAST")
                 perpString += "you see a lumbering shadow."
                 desc+=perpString;
                 break;
@@ -542,13 +544,13 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1] && clearViz > 0){
-                    perpString += player.perspective("EAST")
+                    perpString += this.player.perspective("EAST")
                     perpString += "you see a captive in a straight jacket."
                     desc+=perpString;
                     break rightLoop;
                 }// dark
                 else if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1]){
-                    perpString += player.perspective("EAST")
+                    perpString += this.player.perspective("EAST")
                     perpString += "you see a shadow moving about."
                     desc+=perpString;
                     break rightLoop;
@@ -571,13 +573,13 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1] && clearViz > 0){
-                perpString += player.perspective("SOUTH")
+                perpString += this.player.perspective("SOUTH")
                 perpString += "you see a monster that is so horrific it can't be described."
                 desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1]){
-                perpString += player.perspective("SOUTH")
+                perpString += this.player.perspective("SOUTH")
                 perpString += "you see a lumbering shadow."
                 desc+=perpString;
                 break;
@@ -587,13 +589,13 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1] && clearViz > 0){
-                    perpString += player.perspective("SOUTH")
+                    perpString += this.player.perspective("SOUTH")
                     perpString += "you see a captive in a straight jacket."
                     desc+=perpString;
                     break downLoop;
                 }// dark
                 else if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1]){
-                    perpString += player.perspective("SOUTH")
+                    perpString += this.player.perspective("SOUTH")
                     perpString += "you see a shadow moving about."
                     desc+=perpString;
                     break downLoop;
@@ -616,13 +618,13 @@ class Game {
                 break;
             }//check if monster clearviz
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1] && clearViz > 0){
-                perpString += player.perspective("WEST")
+                perpString += this.player.perspective("WEST")
                 perpString += "you see a monster that is so horrific it can't be described."
                 desc+=perpString;
                 break;
             }//Monster dark
             else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1]){
-                perpString += player.perspective("WEST")
+                perpString += this.player.perspective("WEST")
                 perpString += "you see a lumbering shadow."
                 desc+=perpString;
                 break;
@@ -632,13 +634,13 @@ class Game {
                 currCaptive = this.captives[j];
                 //clearviz
                 if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1] && clearViz > 0){
-                    perpString += player.perspective("WEST")
+                    perpString += this.player.perspective("WEST")
                     perpString += "you see a captive in a straight jacket."
                     desc+=perpString;
                     break leftLoop;
                 }// dark
                 else if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1]){
-                    perpString += player.perspective("WEST")
+                    perpString += this.player.perspective("WEST")
                     perpString += "you see a shadow moving about."
                     desc+=perpString;
                     break leftLoop;
@@ -668,7 +670,7 @@ class Game {
 
 
         if(this.gameWon){
-            return "opening the door reveals a set of stairs that spiral into the ceiling. as you climb the stairs, the walls around you being to get brighter. you finally come to a door with a frosted glass window that is the source of the light that has been illuminating this staircase. you take one last deep breath as you swing opne this final door and feel the light of the sun on your face once again."
+            return "opening the door reveals a set of stairs that spiral into the ceiling. as you climb the stairs, the walls around you being to get brighter. you finally come to a door with a frosted glass window that is the source of the light that has been illuminating this staircase. you take one last deep breath as you swing open this final door and feel the light of the sun on your face once again."
         }
         return desc;
     }

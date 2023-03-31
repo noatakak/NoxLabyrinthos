@@ -43,8 +43,11 @@
             // });
             buttonsDiv = document.querySelector('.buttons');
             description = document.querySelector(".text");
+            right = document.querySelector(".right-text");
             buttonNames = ["pick up the revolver, load the bullet, then open the door"];
-            desText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, tortor vel malesuada tincidunt, libero dolor bibendum ipsum, vel aliquet ipsum neque a felis. Fusce in felis quam. Pellentesque eu arcu ac enim dignissim semper quis a magna.";
+            desText = "";
+            rightText = "you stop for a moment and asses your options.";
+
 
             function createButtons() {
                 buttonsDiv.innerHTML = ''; // clear previous buttons
@@ -62,6 +65,14 @@
                         const txt = document.createElement('p');
                         txt.textContent = desText;
                         description.appendChild(txt);
+
+                        if(!game.gameWon){
+                            right.innerHTML = '';
+                            const rtxt = document.createElement('p');
+                            rtxt.textContent = rightText;
+                            right.appendChild(rtxt);
+                        }
+
                     });
                     buttonsDiv.appendChild(button);
                 });
