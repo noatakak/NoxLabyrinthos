@@ -426,6 +426,158 @@ class Game {
     //create a statement that lets you know that your flashlight decides to dim
     descriptionBuilder(){
         let desc = null;
+        let coordUp = [this.playerLoc[0] - 1,this.playerLoc[1]];
+        let coordRight = [this.playerLoc[0],this.playerLoc[1]+1];
+        let coordDown = [this.playerLoc[0]+1,this.playerLoc[1]];
+        let coordLeft = [this.playerLoc[0],this.playerLoc[1]-1];
+        let currCaptive = null;
+        let clearViz = this.player.visibility;
+
+        desc = this.sounds.join(" ");
+
+        //check up
+        upLoop:
+        for(let i = 0; i < this.gameMaze.length; i++){
+
+            //check to make sure it is inbounds
+            if(coordUp[0] < 0 ){
+                break;
+            }//check if there is a wall
+            else if(this.gameMaze[coordUp[0]][coordUp[1]] == "█"){
+                break;
+            }//check if monster clearviz
+            else if(this.monster.xLoc == coordUp[0] && this.monster.yLoc == coordUp[1] && clearViz > 0){
+                desc.push("");
+                break;
+            }//Monster dark
+            else if(this.monster.xLoc == coordUp[0] && this.monster.yLoc == coordUp[1]){
+                desc.push("");
+                break;
+            }//now i check captives 
+
+            for(let j = 0; j < this.captives.length; j++){
+                currCaptive = this.captives[j];
+                //clearviz
+                if(currCaptive.xLoc == coordUp[0] && currCaptive.yLoc == coordUp[1] && clearViz > 0){
+                    desc.push("");
+                    break upLoop;
+                }// dark
+                else if(currCaptive.xLoc == coordUp[0] && currCaptive.yLoc == coordUp[1]){
+                    desc.push("");
+                    break upLoop;
+                }
+            }
+            clearViz = clearViz - 1;
+            coordUp[0] = coordUp[0] - 1;
+        }
+
+        clearViz = this.player.visibility;
+        //check right
+        rightLoop:
+        for(let i = 0; i > this.gameMaze.length; i++){
+            //check to make sure it is inbounds
+            if(coordRight[1] > this.gameMaze.length -1){
+                break;
+            }//check if there is a wall
+            else if(this.gameMaze[coordRight[0]][coordRight[1]] == "█"){
+                break;
+            }//check if monster clearviz
+            else if(this.monster.xLoc == coordRight[0] && this.monster.yLoc == coordRight[1] && clearViz > 0){
+                desc.push("");
+                break;
+            }//Monster dark
+            else if(this.monster.xLoc == coordRight[0] && this.monster.yLoc == coordRight[1]){
+                desc.push("");
+                break;
+            }//now i check captives 
+
+            for(let j = 0; j < this.captives.length; j++){
+                currCaptive = this.captives[j];
+                //clearviz
+                if(currCaptive.xLoc == coordRight[0] && currCaptive.yLoc == coordRight[1] && clearViz > 0){
+                    desc.push("");
+                    break rightLoop;
+                }// dark
+                else if(currCaptive.xLoc == coordRight[0] && currCaptive.yLoc == coordRight[1]){
+                    desc.push("");
+                    break rightLoop;
+                }
+            }
+            clearViz = clearViz - 1;
+            coordRight[1] = coordRight[1] + 1;
+        }
+
+        clearViz = this.player.visibility;
+        //check down
+        downLoop:
+        for(let i = 0; i < this.gameMaze.length; i++){
+            //check to make sure it is inbounds
+            if(coordDown[0] > this.gameMaze.length -1){
+                break;
+            }//check if there is a wall
+            else if(this.gameMaze[coordDown[0]][coordDown[1]] == "█"){
+                break;
+            }//check if monster clearviz
+            else if(this.monster.xLoc == coordDown[0] && this.monster.yLoc == coordDown[1] && clearViz > 0){
+                desc.push("");
+                break;
+            }//Monster dark
+            else if(this.monster.xLoc == coordDown[0] && this.monster.yLoc == coordDown[1]){
+                desc.push("");
+                break;
+            }//now i check captives 
+
+            for(let j = 0; j < this.captives.length; j++){
+                currCaptive = this.captives[j];
+                //clearviz
+                if(currCaptive.xLoc == coordDown[0] && currCaptive.yLoc == coordDown[1] && clearViz > 0){
+                    desc.push("");
+                    break downLoop;
+                }// dark
+                else if(currCaptive.xLoc == coordDown[0] && currCaptive.yLoc == coordDown[1]){
+                    desc.push("");
+                    break downLoop;
+                }
+            }
+            clearViz = clearViz - 1;
+            coordDown[0] = coordDown[0] + 1;
+        }
+
+        clearViz = this.player.visibility;
+        //check left
+        leftLoop:
+        for(let i = 0; i < this.gameMaze.length; i++){
+            //check to make sure it is inbounds
+            if(coordLeft[1] < 0){
+                break;
+            }//check if there is a wall
+            else if(this.gameMaze[coordLeft[0]][coordLeft[1]] == "█"){
+                break;
+            }//check if monster clearviz
+            else if(this.monster.xLoc == coordLeft[0] && this.monster.yLoc == coordLeft[1] && clearViz > 0){
+                desc.push("");
+                break;
+            }//Monster dark
+            else if(this.monster.xLoc == coordLeft[0] && this.monster.yLoc == coordLeft[1]){
+                desc.push("");
+                break;
+            }//now i check captives 
+
+            for(let j = 0; j < this.captives.length; j++){
+                currCaptive = this.captives[j];
+                //clearviz
+                if(currCaptive.xLoc == coordLeft[0] && currCaptive.yLoc == coordLeft[1] && clearViz > 0){
+                    desc.push("");
+                    break leftLoop;
+                }// dark
+                else if(currCaptive.xLoc == coordLeft[0] && currCaptive.yLoc == coordLeft[1]){
+                    desc.push("");
+                    break leftLoop;
+                }
+            }
+            clearViz = clearViz - 1;
+            coordLeft[1] = coordLeft[1] - 1;
+        }
         
         //shooting flavor text
         if(this.lastMove.includes("revolver")){
@@ -445,7 +597,7 @@ class Game {
         }
         
         
-        desc = this.sounds.join(" ");
+        
 
         return desc;
     }

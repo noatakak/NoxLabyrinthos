@@ -4,6 +4,7 @@ class Player{
     searchChance;
     captiveInParty;
     compass;
+    visibility;
 
     gun;
     bulletCount;
@@ -15,11 +16,13 @@ class Player{
     flashMineCount;
     motionTracker;
     
+    
     constructor(attack, survive, search){
         this.attackChance = attack;
         this.surviveChance = survive;
         this.searchChance = search;
         this.captiveInParty = 0;
+        this.visibility = 0;
 
         this.compass = new Compass();
         
@@ -42,10 +45,13 @@ class Player{
         let des = "";
         if(item == "flashlight"){
             this.flashlight = true;
-            des = "you find a flashflight sitting in the corner.";
-            if(this.batteryCount > 0){
-                des+=" you put a battery that you found earlier inside the light and the light shines even brigher."
+            this.visibility = 1;
+            des = "you find a flashlight sitting in the corner.";
+            if(this.batteryCount == 1){
+                des+=" you put a battery that you found earlier inside the light and the light shines even brigher.";
+                this.visibility = 2;
             }
+            
         }else if(item == "machete"){
             this.machete = true;
             des = "you find a machete stuck into the wall of the room.";
@@ -64,7 +70,8 @@ class Player{
             if(!flashlight){
                 des+=" it looks like it would fit in a flashlight.";
             }else if(flashlight && this.batteryCount == 1){
-                des+=" you slot the new battery into your flashlight and it shines even brighgter than before."
+                des+=" you slot the new battery into your flashlight and it shines even brighter than before."
+                this.visibility = 2;
             }
         }else if(item == "shiv"){
             this.shivCount+=1;
