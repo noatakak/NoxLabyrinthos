@@ -1,9 +1,9 @@
 class Monster{
-    xLoc;
-    yLoc;
+    row;
+    col;
     
     constructor(x, y) {
-        this.xLoc = x;
-        this.yLoc = y;
+        this.row = x;
+        this.col = y;
     }
 }

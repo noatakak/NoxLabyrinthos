@@ -2,8 +2,6 @@ class Game {
 
     //        FIELDS        \\ 
     gameMaze;
-    monLoc;
-    capLoc;
     playerLoc;
     monster;
     captives;
@@ -27,17 +25,13 @@ class Game {
         this.roomMap = this.genRooms(this.gameMaze);
         this.roomMap.set(this.start.toString(), "empty");
         this.roomMap.set(this.end.toString(), "empty");
-        this.monLoc = this.genMonLoc();
-        this.capLoc = this.genCapLoc();
         this.playerLoc = this.start;
-        this.monster = new Monster([0,0]);
-        //might have to put a this keyword on the object
-        this.captives = this.genCaptiveArray
+        this.captives = this.spawnCaptives();
         this.player = new Player(.5, .5, .5);
         this.flavorText = this.pullFlavorText
         this.sounds = [];
         this.turn = 0;
-        this.printMaze(this.gameMaze);
+        this.spawnMonster();
         this.printMaze(this.gameMaze);
         this.lastMove = null;
     }
@@ -162,31 +156,55 @@ class Game {
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
-    //returns a 2d bool array with true being where the monster is
-    genMonLoc(){
-
-        return null;
+    //creates a monster object
+    spawnMonster(){
+        let size = this.gameMaze.length;
+        let max = -1;
+        let coords = [-1,-1];
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if(this.gameMaze[i][j] == " ") {
+                    let dis = Math.abs(i - this.start[0]) + Math.abs(j - this.start[1]);
+                    if(dis > max){
+                        max = dis;
+                        coords[0] = i;
+                        coords[1] = j;
+                    }
+                }
+            }
+          }
+        this.monster = new Monster(coords[0], coords[1]);
     }
 
     //generates a 2d array of all captive locations.
     //returns a int array same size as maze,  with the value of the int being the amount of captives in that cell
-    genCapLoc(){
+    spawnCaptives(){
         let captiveList = [];
+        let size = this.gameMaze.length
         for(let [coord, item] of this.roomMap) { // for each room, if not empty (aka start or end), find the adjacent hallway and spawn a captive there
             if(item != "empty") {
-
+                let rowCol = coord.split(",");
+                let i = parseInt(rowCol[0]);
+                let j = parseInt(rowCol[1]);
+                let topNeighbor = (i-1 < 0 || this.gameMaze[i-1][j] == "█");
+                let bottomNeighbor = (i+1 > size-1 || this.gameMaze[i+1][j] == "█");
+                let leftNeighbor = (j-1 < 0 || this.gameMaze[i][j-1] == "█");
+                let rightNeighbor = (j+1 > size-1 || this.gameMaze[i][j+1] == "█");
+                if(topNeighbor && bottomNeighbor && leftNeighbor && !rightNeighbor){
+                    captiveList.push(new Captive(i,j+1));
+                }else if(topNeighbor && bottomNeighbor && !leftNeighbor && rightNeighbor){
+                    captiveList.push(new Captive(i,j-1));
+                }else if(topNeighbor && !bottomNeighbor && leftNeighbor && rightNeighbor){
+                    captiveList.push(new Captive(i+1,j));
+                }else if(!topNeighbor && bottomNeighbor && leftNeighbor && rightNeighbor){
+                    captiveList.push(new Captive(i-1,j));
+                }
             }
         }
 
         return captiveList;
     }
 
-    //makes a bunch of objects of type captive and puts them in a arraylist
-    //returns arraylist of captive objects
-    genCaptiveArray(){
-
-        return null;
-    }
 
     //pulls all the flavor text from a text file of our strings
     //returns a arrraylist of strings that is randomly chosen.
@@ -405,7 +423,14 @@ class Game {
     //update the monster array in the direction it chooses to go.
     //does not need to return anything
     monsterAction(){
+        let max = -1;
+        let target = [-1,-1];
+        for (let i = 0; i < this.captiveList; i++) {
+            
+        }
+        if(this.gameMaze[this.playerLoc[0]][this.playerLoc[1]] != "□"){
 
+        }
     }
 
     //Need two behaviors, exploration and escape from monster
@@ -414,7 +439,15 @@ class Game {
     //During the escape it will be moving in the direction away from the monster maximize manhattan distance between it and the monster. 
     //run a for loop through the captive arraylist to make these decisions.
     captiveAction(){
-
+        for(let cap in this.captiveList) {
+            if(!cap.escaping){
+                //check visibility
+                //if clear then move randomly
+                //if not clear then move in direction of the thing seen
+            }else{
+                //pick option that maximizes manhatten distance between captive and monster
+            }
+        }
     }
 
     //check the maze array around you, if statements and include player visibility value as conditionals to improve detail.

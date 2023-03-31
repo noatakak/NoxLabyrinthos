@@ -1,12 +1,14 @@
 class Captive{
-    xLoc;
-    yLoc;
+    row;
+    col;
     captiveCount;
+    escaping;
     
     constructor(x, y) {
-        this.xLoc = x;
-        this.yLoc = y;
+        this.row = x;
+        this.col = y;
         this.captiveCount = 1;
+        this.escaping = flase;
     }
 
     setcaptiveCount(){
