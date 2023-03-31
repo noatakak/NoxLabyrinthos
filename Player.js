@@ -114,4 +114,26 @@ class Player{
 
         return newPlayerCords;
     }
+
+    perspective(actDir){
+        let currNode = this.compass.currentDirection.head;
+        for(let i  = 0; i < this.compass.currentDirection.length; i++){
+            if(currNode.data == actDir){
+                if(i == 0){
+                    return "in front of you, ";
+                }
+                else if( i == 1){
+                    return "to the right, ";
+                }
+                else if(i == 2){
+                    return "behind you, "
+                }
+                else{
+                    return "to the left, "
+                }
+                break;
+            }
+            currNode = currNode.next;
+        }
+    }
 }
