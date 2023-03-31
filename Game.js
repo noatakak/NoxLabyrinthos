@@ -230,8 +230,8 @@ class Game {
     //called when a player shoots their revolver
     gunshot(direction){
         let compassDir = "";
-        for(let i = 0; i < this.compass.currentDirection.length; i++){
-            let node = this.compass.currentDirection.head;
+        for(let i = 0; i < this.player.compass.currentDirection.length; i++){
+            let node = this.player.compass.currentDirection.head;
             if(i == direction){
                 compassDir = node.data;
                 break;
@@ -478,7 +478,7 @@ class Game {
             
             let size = this.gameMaze.length;
             for(let i = 0; i < arr.length; i++){
-                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
+                if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][1] <= size -1 && (this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c")){
                     if(i == 0){
                         availActions.push("continue forward down the hall");
                     }else if(i == 1){
@@ -507,7 +507,7 @@ class Game {
             
             if(this.player.gun && this.player.bulletCount > 0){
                 for(let i = 0; i < arr.length; i++){
-                    if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c"){
+                    if(arr[i][0] >= 0 && arr[i][0] <= size -1 && arr[i][1] >= 0 && arr[i][0] <= size -1 && (this.gameMaze[arr[i][0]][arr[i][1]] == " " || this.gameMaze[arr[i][0]][arr[i][1]] == "c")){
                         if(i == 0){
                             availActions.push("look forward and fire your revolver");
                         }else if(i == 1){
