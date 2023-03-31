@@ -2,8 +2,6 @@ class Game {
 
     //        FIELDS        \\ 
     gameMaze;
-    monLoc;
-    capLoc;
     playerLoc;
     monster;
     captives;
@@ -27,16 +25,13 @@ class Game {
         this.roomMap = this.genRooms(this.gameMaze);
         this.roomMap.set(this.start.toString(), "empty");
         this.roomMap.set(this.end.toString(), "empty");
-        this.monLoc = this.genMonLoc();
         this.playerLoc = this.start;
-        this.monster = new Monster([0,0]);
-        //might have to put a this keyword on the object
         this.captives = this.spawnCaptives();
         this.player = new Player(.5, .5, .5);
         this.flavorText = this.pullFlavorText
         this.sounds = [];
         this.turn = 0;
-        this.printMaze(this.gameMaze);
+        this.spawnMonster();
         this.printMaze(this.gameMaze);
         this.lastMove = null;
     }
@@ -161,10 +156,24 @@ class Game {
     }
 
     //generates the location for the monster, keeps in mind the maze array to be placed in a empty space.
-    //returns a 2d bool array with true being where the monster is
-    genMonLoc(){
-
-        return null;
+    //creates a monster object
+    spawnMonster(){
+        let size = this.gameMaze.length;
+        let max = -1;
+        let coords = [-1,-1];
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if(this.gameMaze[i][j] == " ") {
+                    let dis = Math.abs(i - this.start[0]) + Math.abs(j - this.start[1]);
+                    if(dis > max){
+                        max = dis;
+                        coords[0] = i;
+                        coords[1] = j;
+                    }
+                }
+            }
+          }
+        this.monster = new Monster(coords[0], coords[1]);
     }
 
     //generates a 2d array of all captive locations.
