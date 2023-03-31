@@ -15,9 +15,9 @@ class Game {
     // start and end courdinates, make sure to make a checker in the player turn method to ensure a win
     start;
     end;
-    //maybe width and length fields
-    //num of captives?
-    //gameEnd and gameWon booleans and a checker?
+
+    gameWon;
+    gameLost;
 
     //        CONSTRUCTOR        \\ 
     constructor(){
@@ -354,8 +354,8 @@ class Game {
             }
         }
         this.lastMove = playInput;
-        this.monsterAction();
         this.captiveAction();
+        this.monsterAction();
         //make encounter check
         this.turn+=1;
         return null;
@@ -628,10 +628,12 @@ class Game {
         else if(this.lastMove.includes("flash") && this.lastMove.includes("mine") && this.lastMove.includes("ground")){
 
         }
-        
-        
-        
 
+
+
+        if(this.gameWon){
+            return "opening the door reveals a set of stairs that spiral into the ceiling. as you climb the stairs, the walls around you being to get brighter. you finally come to a door with a frosted glass window that is the source of the light that has been illuminating this staircase. you take one last deep breath as you swing opne this final door and feel the light of the sun on your face once again."
+        }
         return desc;
     }
 
@@ -639,6 +641,9 @@ class Game {
     //returns a list of strings that come from all available actions to the player including movement and actions. Max 9 actions in a turn .
     getActionList(){
         let availActions = [];
+        if(this.gameWon || this.gameLost){
+            return ["game over"]
+        }
 
         if(this.turn == 0){
             availActions.push("pick up the revolver and open the door")

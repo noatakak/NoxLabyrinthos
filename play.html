@@ -18,7 +18,11 @@
                 <button onclick="window.location.reload()">start over</button>
             </div>
             <div class="text">
-                <p>html text</p>
+                <p>you awaken, alone in the dark. as your eyes adjust to the darkness you find yourself in small room with no windows, and a single door. 
+                    the only thing in the room with you is a small table.
+                    you approach the table and see a revolver sitting on the table with a single bullet next to it. 
+                    one thought races through your mind: escape
+                </p>
             </div>
             <div class="right-container">
                 <div class="right-text">
@@ -28,9 +32,9 @@
                     <button>Button 1</button>
                 </div>
             </div>
-            <div class="credit">
-                <p>a game by ryan mitchell and noatak post</p>
-            </div>
+        </div>
+        <div class="credit">
+            <p>a game by ryan mitchell and noatak post</p>
         </div>
         <script>
             let game = new Game();
@@ -39,7 +43,7 @@
             // });
             buttonsDiv = document.querySelector('.buttons');
             description = document.querySelector(".text");
-            buttonNames = ["pick up the revolver and open the door"];
+            buttonNames = ["pick up the revolver, load the bullet, then open the door"];
             desText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus, tortor vel malesuada tincidunt, libero dolor bibendum ipsum, vel aliquet ipsum neque a felis. Fusce in felis quam. Pellentesque eu arcu ac enim dignissim semper quis a magna.";
 
             function createButtons() {
