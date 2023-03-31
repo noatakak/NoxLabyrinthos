@@ -479,11 +479,11 @@ class Game {
             else if(this.gameMaze[coordUp[0]][coordUp[1]] == "█"){
                 break;
             }//check if monster clearviz
-            else if(this.monster.xLoc == coordUp[0] && this.monster.yLoc == coordUp[1] && clearViz > 0){
+            else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1] && clearViz > 0){
                 desc.push("");
                 break;
             }//Monster dark
-            else if(this.monster.xLoc == coordUp[0] && this.monster.yLoc == coordUp[1]){
+            else if(this.monster.row == coordUp[0] && this.monster.col == coordUp[1]){
                 desc.push("");
                 break;
             }//now i check captives 
@@ -491,11 +491,11 @@ class Game {
             for(let j = 0; j < this.captives.length; j++){
                 currCaptive = this.captives[j];
                 //clearviz
-                if(currCaptive.xLoc == coordUp[0] && currCaptive.yLoc == coordUp[1] && clearViz > 0){
+                if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1] && clearViz > 0){
                     desc.push("");
                     break upLoop;
                 }// dark
-                else if(currCaptive.xLoc == coordUp[0] && currCaptive.yLoc == coordUp[1]){
+                else if(currCaptive.row == coordUp[0] && currCaptive.col == coordUp[1]){
                     desc.push("");
                     break upLoop;
                 }
@@ -515,11 +515,11 @@ class Game {
             else if(this.gameMaze[coordRight[0]][coordRight[1]] == "█"){
                 break;
             }//check if monster clearviz
-            else if(this.monster.xLoc == coordRight[0] && this.monster.yLoc == coordRight[1] && clearViz > 0){
+            else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1] && clearViz > 0){
                 desc.push("");
                 break;
             }//Monster dark
-            else if(this.monster.xLoc == coordRight[0] && this.monster.yLoc == coordRight[1]){
+            else if(this.monster.row == coordRight[0] && this.monster.col == coordRight[1]){
                 desc.push("");
                 break;
             }//now i check captives 
@@ -527,11 +527,11 @@ class Game {
             for(let j = 0; j < this.captives.length; j++){
                 currCaptive = this.captives[j];
                 //clearviz
-                if(currCaptive.xLoc == coordRight[0] && currCaptive.yLoc == coordRight[1] && clearViz > 0){
+                if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1] && clearViz > 0){
                     desc.push("");
                     break rightLoop;
                 }// dark
-                else if(currCaptive.xLoc == coordRight[0] && currCaptive.yLoc == coordRight[1]){
+                else if(currCaptive.row == coordRight[0] && currCaptive.col == coordRight[1]){
                     desc.push("");
                     break rightLoop;
                 }
@@ -551,11 +551,11 @@ class Game {
             else if(this.gameMaze[coordDown[0]][coordDown[1]] == "█"){
                 break;
             }//check if monster clearviz
-            else if(this.monster.xLoc == coordDown[0] && this.monster.yLoc == coordDown[1] && clearViz > 0){
+            else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1] && clearViz > 0){
                 desc.push("");
                 break;
             }//Monster dark
-            else if(this.monster.xLoc == coordDown[0] && this.monster.yLoc == coordDown[1]){
+            else if(this.monster.row == coordDown[0] && this.monster.col == coordDown[1]){
                 desc.push("");
                 break;
             }//now i check captives 
@@ -563,11 +563,11 @@ class Game {
             for(let j = 0; j < this.captives.length; j++){
                 currCaptive = this.captives[j];
                 //clearviz
-                if(currCaptive.xLoc == coordDown[0] && currCaptive.yLoc == coordDown[1] && clearViz > 0){
+                if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1] && clearViz > 0){
                     desc.push("");
                     break downLoop;
                 }// dark
-                else if(currCaptive.xLoc == coordDown[0] && currCaptive.yLoc == coordDown[1]){
+                else if(currCaptive.row == coordDown[0] && currCaptive.col == coordDown[1]){
                     desc.push("");
                     break downLoop;
                 }
@@ -587,11 +587,11 @@ class Game {
             else if(this.gameMaze[coordLeft[0]][coordLeft[1]] == "█"){
                 break;
             }//check if monster clearviz
-            else if(this.monster.xLoc == coordLeft[0] && this.monster.yLoc == coordLeft[1] && clearViz > 0){
+            else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1] && clearViz > 0){
                 desc.push("");
                 break;
             }//Monster dark
-            else if(this.monster.xLoc == coordLeft[0] && this.monster.yLoc == coordLeft[1]){
+            else if(this.monster.row == coordLeft[0] && this.monster.col == coordLeft[1]){
                 desc.push("");
                 break;
             }//now i check captives 
@@ -599,11 +599,11 @@ class Game {
             for(let j = 0; j < this.captives.length; j++){
                 currCaptive = this.captives[j];
                 //clearviz
-                if(currCaptive.xLoc == coordLeft[0] && currCaptive.yLoc == coordLeft[1] && clearViz > 0){
+                if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1] && clearViz > 0){
                     desc.push("");
                     break leftLoop;
                 }// dark
-                else if(currCaptive.xLoc == coordLeft[0] && currCaptive.yLoc == coordLeft[1]){
+                else if(currCaptive.row == coordLeft[0] && currCaptive.col == coordLeft[1]){
                     desc.push("");
                     break leftLoop;
                 }
