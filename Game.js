@@ -171,9 +171,14 @@ class Game {
     //generates a 2d array of all captive locations.
     //returns a int array same size as maze,  with the value of the int being the amount of captives in that cell
     genCapLoc(){
-        //generate the random num of captives in empty spaces across the maze.
+        let captiveList = [];
+        for(let [coord, item] of this.roomMap) { // for each room, if not empty (aka start or end), find the adjacent hallway and spawn a captive there
+            if(item != "empty") {
 
-        return null;
+            }
+        }
+
+        return captiveList;
     }
 
     //makes a bunch of objects of type captive and puts them in a arraylist
