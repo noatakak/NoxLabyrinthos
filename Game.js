@@ -131,10 +131,10 @@ class Game {
         for (let i = 0; i < size; i++) {
             for (let j = 0; j < size; j++) {
                 let isRoom = false;
-                let topNeighbor = maze[i][j] == " " && i > 0 && maze[i-1][j] == "█";
-                let bottomNeighbor = maze[i][j] == " " && i < size-1 && maze[i+1][j] == "█";
-                let leftNeighbor = maze[i][j] == " " && j > 0 && maze[i][j-1] == "█";
-                let rightNeighbor = maze[i][j] == " " && j < size-1 && maze[i][j+1] == "█";
+                let topNeighbor = maze[i][j] == " " && (i-1 < 0 || maze[i-1][j] == "█");
+                let bottomNeighbor = maze[i][j] == " " && (i+1 > size-1 || maze[i+1][j] == "█");
+                let leftNeighbor = maze[i][j] == " " && (j-1 < 0 || maze[i][j-1] == "█");
+                let rightNeighbor = maze[i][j] == " " && (j+1 > size-1 || maze[i][j+1] == "█");
                 if(topNeighbor && bottomNeighbor && leftNeighbor && !rightNeighbor){
                     isRoom = true;
                 }else if(topNeighbor && bottomNeighbor && !leftNeighbor && rightNeighbor){
@@ -196,7 +196,7 @@ class Game {
 
     // called when the player chooses to search their current room
     searchRoom(){
-        let searchDescription = this.player.addItem(this.roomMap.get(this.playerLoc));
+        let searchDescription = this.player.addItem(this.roomMap.get(this.playerLoc.toString()));
 
         this.roomMap.set(this.playerLoc.toString(), "empty");
 
